@@ -28,7 +28,11 @@ public class CheckersBoard extends Board {
                     } else if (i > 4) {
                         pieces[i][j] = men2;
                         team2.get(men2).add(new Tuple<>(i, j));
+                    } else {
+                        pieces[i][j] = null;
                     }
+                } else {
+                    pieces[i][j] = null;
                 }
             }
         }

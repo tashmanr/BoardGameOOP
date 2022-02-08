@@ -9,9 +9,6 @@ public abstract class GamePiece {
         this.team = team;
     }
 
-//    public ArrayList<Tuple<Integer, Integer>> getLocations() {
-//        return locations;
-//    }
 //
 //    public void addPiece(Tuple<Integer, Integer> spot) {
 //        locations.add(spot);
