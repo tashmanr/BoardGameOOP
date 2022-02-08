@@ -43,7 +43,12 @@ public abstract class Board {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                temp += pieces[i][j].toString() + " ";
+                if (pieces[i][j] == null) {
+                    temp += " ";
+                }
+                else{
+                    temp += pieces[i][j].toString() + " ";
+                }
             }
             temp += "\n";
         }
