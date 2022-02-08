@@ -11,6 +11,6 @@ public abstract class Player {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[isHuman=" + isHuman() + "]";
+		return getClass().getSimpleName();
 	}
 }
