@@ -5,6 +5,5 @@ public abstract class Board {
         this.pieces = new GamePiece[8][8];
     }
 
-    @Override
-    public void LoadBoard();
+    public abstract void LoadBoard();
 }
