@@ -37,5 +37,10 @@ public class CheckersBoard extends Board {
             }
         }
     }
+
+    @Override
+    protected boolean isLegalMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end) {
+        return false;
+    }
 }
 

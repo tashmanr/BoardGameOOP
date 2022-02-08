@@ -24,4 +24,16 @@ public abstract class Board {
             return team1;
         } else return team2;
     }
+
+    public void makeMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end){
+        GamePiece mover = pieces[start.x][start.y];
+        if (mover != null && isLegalMove(start, end)){
+            pieces[start.x][start.y] = null;
+            pieces[end.x][end.y] = mover;
+        } else {
+            //need to report illegal move
+        }
+    }
+
+    protected abstract boolean isLegalMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end);
 }
