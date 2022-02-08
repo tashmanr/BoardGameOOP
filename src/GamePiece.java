@@ -11,4 +11,9 @@ public abstract class GamePiece {
     public ArrayList<Integer> getMoveDirection() {
         return moves;
     }
+    
+    @Override
+	public String toString() {
+		return getClass().getSimpleName();
+	}
 }
