@@ -1,8 +1,12 @@
 public class GameInitializer {
-    private Game game;
 
-    public GameInitializer(){
-        game = new CheckersGame();
+    public GameInitializer(GameOptions option) {
+        Game game;
+        if (option == GameOptions.CHECKERS) {
+            game = new CheckersGame();
+        } else {
+            game = new DummyGame();
+        }
         game.loadGame();
         game.start();
     }
