@@ -36,4 +36,17 @@ public abstract class Board {
     }
 
     protected abstract boolean isLegalMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end);
+    
+    @Override
+    public String toString() {
+        String temp = "";
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                temp += pieces[i][j].toString() + " ";
+            }
+            temp += "\n";
+        }
+        return temp;
+    }
 }
