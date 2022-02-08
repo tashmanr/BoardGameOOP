@@ -9,6 +9,10 @@ public abstract class GamePiece {
         this.team = team;
     }
 
+    public List<Tuple<Integer, Integer>> getLocations(){
+        return locations;
+    }
+
     public abstract ArrayList<Integer> getMoveDirection();
 
     public void movePiece(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end){
