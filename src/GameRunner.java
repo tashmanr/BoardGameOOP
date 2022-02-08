@@ -6,18 +6,17 @@ enum GameOptions {
 
 public class GameRunner {
     private GameInitializer gameInitializer;
-    private boolean player1Turn = true;
-    private boolean isOver = false;
 
     public GameRunner() {
         Game game = new GameInitializer().getGame(pickGame(), getPlayers());
         game.start();
-        while (!isOver){
-            //play turn
-            //check if game is over
-            //switch turn
-            player1Turn = !player1Turn;
-        }
+//        while (!isOver){
+//            //play turn
+//            if ()
+//            //check if game is over
+//            //switch turn
+//            player1Turn = !player1Turn;
+//        }
     }
 
     private GameOptions pickGame() {
