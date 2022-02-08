@@ -1,6 +1,6 @@
 public class GameInitializer {
 
-    public GameInitializer(GameOptions option) {
+    public Game getGame(GameOptions option, Tuple<Player, Player> players) {
         Game game;
         if (option == GameOptions.CHECKERS) {
             game = new CheckersGame();
@@ -8,6 +8,7 @@ public class GameInitializer {
             game = new DummyGame();
         }
         game.loadGame();
-        game.start();
+        game.setPlayers(players.x, players.y);
+        return game;
     }
 }

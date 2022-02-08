@@ -7,5 +7,10 @@ public abstract class Game {
         board.loadBoard();
     }
 
+    public void setPlayers(Player p1, Player p2){
+        player1 = p1;
+        player2 = p2;
+    }
+
     public abstract void  start();
 }
