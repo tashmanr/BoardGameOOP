@@ -1,7 +1,18 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GamePiece {
-    private Tuple<Integer, Integer> location;
+    protected List<Tuple<Integer, Integer>> locations;
+    protected Integer team;
 
-    public abstract List<Tuple<Integer, Integer>> getMoves();
+    protected GamePiece(Integer team) {
+        this.team = team;
+    }
+
+    public abstract ArrayList<Integer> getMoveDirection();
+
+    public void movePiece(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end){
+        this.locations.remove(start);
+        this.locations.add(end);
+    }
 }
