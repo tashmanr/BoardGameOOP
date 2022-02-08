@@ -13,7 +13,7 @@ public abstract class Board {
 
     protected abstract void createPieces();
 
-    public abstract void LoadBoard();
+    public abstract void loadBoard();
 
     public GamePiece[][] getBoard() {
         return pieces;

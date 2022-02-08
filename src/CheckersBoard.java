@@ -17,7 +17,7 @@ public class CheckersBoard extends Board {
     }
 
     @Override
-    public void LoadBoard() {
+    public void loadBoard() {
         createPieces();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
