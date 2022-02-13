@@ -57,6 +57,7 @@ public abstract class Board {
             }
             temp += "\n";
         }
+        temp += "-------------------------\n";
         return temp;
     }
 }
