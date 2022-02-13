@@ -6,8 +6,9 @@ enum GameOptions {
 
 public class GameRunner {
     private GameInitializer gameInitializer;
+    private static GameRunner runnerInstance = null;
 
-    public GameRunner() {
+    private GameRunner() {
         Game game = new GameInitializer().getGame(pickGame(), getPlayers());
         game.start();
 //        while (!isOver){
@@ -17,6 +18,13 @@ public class GameRunner {
 //            //switch turn
 //            player1Turn = !player1Turn;
 //        }
+    }
+
+    public static GameRunner getInstance(){
+        if (runnerInstance == null){
+            runnerInstance = new GameRunner();
+        }
+        return runnerInstance;
     }
 
     private GameOptions pickGame() {
