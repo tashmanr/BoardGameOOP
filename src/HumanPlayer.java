@@ -13,13 +13,15 @@ public class HumanPlayer extends Player{
         this.sc = new Scanner(System.in);
     }
     
-    public void makeMove(Game game){
+    public Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> makeMove(Game game){
         
         Boolean valid_input = false;
+        String[] arrOfStr;
         do{
-            System.out.print("please enter your desired move:\n");
+            // the input needs to be in format 1,2 3,4 while 1,2 is starting pos and 3,4 is new desired position
+            System.out.print("please enter your move:\n");
             String str= sc.nextLine();
-            String[] arrOfStr = str.split("[ ,]+");
+            arrOfStr = str.split("[ ,]+");
 
             System.out.print(str);
             System.out.print("\n\n");
@@ -35,8 +37,8 @@ public class HumanPlayer extends Player{
 
 
         Tuple<Integer, Integer> start = new Tuple(Integer.parseInt(arrOfStr[0]), Integer.parseInt(arrOfStr[1]));
-        Tuple<Integer, Integer> end = new Tuple(Integer.parseInt(arrOfStr[3]), Integer.parseInt(arrOfStr[4]));
-
-        return;
+        Tuple<Integer, Integer> end = new Tuple(Integer.parseInt(arrOfStr[2]), Integer.parseInt(arrOfStr[3]));
+        Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move = new Tuple<>(start, end);
+        return move;
     }
 }

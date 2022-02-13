@@ -25,7 +25,7 @@ public class GameRunner {
     }
 
     private Tuple<Player, Player> getPlayers() {
-        int players = 1; // later give option to change players #
+        int players = 1; // TODO later give option to change players #
         Player p1 = new HumanPlayer();
         Player p2;
         if (players == 1) {
