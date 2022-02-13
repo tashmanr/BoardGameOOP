@@ -12,7 +12,7 @@ public class ManPiece extends GamePiece{
     
     @Override
     public String toString() {
-        return getClass().getSimpleName() + team.toString();
+        return "M" + team.toString();
 
     }
 

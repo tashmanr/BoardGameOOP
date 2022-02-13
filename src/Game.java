@@ -17,6 +17,8 @@ public abstract class Game {
     public void start() {
         while (!isOver) {
             //play turn
+            System.out.print(board);
+            System.out.print("\n");
             if (player1Turn) {
                 player1.makeMove(this);
             } else {

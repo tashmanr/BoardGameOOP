@@ -42,13 +42,18 @@ public abstract class Board {
         String temp = "";
 
         for (int i = 0; i < size; i++) {
+            temp += "-------------------------\n";
             for (int j = 0; j < size; j++) {
+                if(j==0){
+                    temp+="|";
+                }
                 if (pieces[i][j] == null) {
-                    temp += " ";
+                    temp += "  ";
                 }
                 else{
-                    temp += pieces[i][j].toString() + " ";
+                    temp += pieces[i][j].toString();
                 }
+                temp+= "|";
             }
             temp += "\n";
         }

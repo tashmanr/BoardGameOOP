@@ -7,7 +7,7 @@ public class KingPiece extends GamePiece {
     
     @Override
     public String toString() {
-        return getClass().getSimpleName() + team.toString();
+        return "K" + team.toString();
 
     }
 }
