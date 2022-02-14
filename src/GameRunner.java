@@ -15,8 +15,8 @@ public class GameRunner {
         game.start();
     }
 
-    public static GameRunner getInstance(){
-        if (runnerInstance == null){
+    public static GameRunner getInstance() {
+        if (runnerInstance == null) {
             runnerInstance = new GameRunner();
         }
         return runnerInstance;

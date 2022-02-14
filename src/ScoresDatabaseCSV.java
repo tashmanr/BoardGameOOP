@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ScoresDatabaseCSV implements IScoresDatabase {
-    File scoresFile;
-    String fileName = "scores.txt";
+    private File scoresFile;
+    private final String fileName = "scores.txt";
 
     public ScoresDatabaseCSV() {
         createFile();
@@ -42,12 +42,17 @@ public class ScoresDatabaseCSV implements IScoresDatabase {
     @Override
     public ArrayList<Tuple<String, Integer>> getData() {
         ArrayList<Tuple<String, Integer>> scores = new ArrayList<>();
-        Scanner scanner = new Scanner(fileName);
-//        while (scanner.hasNextLine()) {
-//            String[] data = scanner.nextLine().split("[,]", 0);
-//            scores.add(new Tuple<>(data[0], Integer.valueOf(data[1])));
-//        }
-        scanner.close();
+        try {
+            Scanner scanner = new Scanner(scoresFile);
+            while (scanner.hasNextLine()) {
+                String[] data = scanner.nextLine().split("[,]", 0);
+                scores.add(new Tuple<>(data[0], Integer.valueOf(data[1])));
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
         return scores;
     }
 }

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ScoreBoard {
     private static ScoreBoard scoreBoardInstance = null;
-    private ArrayList<Tuple<String, Integer>> scoreboard;
+    private static ArrayList<Tuple<String, Integer>> scoreboard;
     private static IScoresDatabase db;
 
     private ScoreBoard() {
