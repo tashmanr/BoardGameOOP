@@ -4,6 +4,7 @@ public abstract class Game {
     protected Player player2;
     private boolean player1Turn = true;
     private boolean isOver = false;
+    private Player winner;
 
     public void loadGame() {
         board.loadBoard();
@@ -28,5 +29,15 @@ public abstract class Game {
             //switch turn
             player1Turn = !player1Turn;
         }
+        // TODO: need to define logic to declar winner
+        if (player1Turn) {
+            winner = player1;
+        } else {
+            winner = player2;
+        }
+    }
+
+    public Player getWinner() {
+        return winner;
     }
 }

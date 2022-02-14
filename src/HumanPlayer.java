@@ -7,10 +7,12 @@ public class HumanPlayer extends Player{
      */
     
     private Scanner sc;
+    private String playerName = "Human";
 
     public HumanPlayer(){
         // Using Scanner for Getting Input from User
         this.sc = new Scanner(System.in);
+        // TODO: need to get player to input name
     }
     
     public Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> makeMove(Game game){
@@ -40,5 +42,10 @@ public class HumanPlayer extends Player{
         Tuple<Integer, Integer> end = new Tuple(Integer.parseInt(arrOfStr[2]), Integer.parseInt(arrOfStr[3]));
         Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move = new Tuple<>(start, end);
         return move;
+    }
+
+    @Override
+    public String getPlayerName() {
+        return playerName;
     }
 }

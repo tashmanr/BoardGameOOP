@@ -6,4 +6,9 @@ public class ComputerPlayer extends Player{
     public Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> makeMove(Game game){
         return null;
     }
+
+    @Override
+    public String getPlayerName() {
+        return "Computer";
+    }
 }

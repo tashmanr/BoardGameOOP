@@ -22,6 +22,21 @@ public class ScoreBoard {
         db.saveData(scoreboard);
     }
 
+    public void addGameResults(String player) {
+        int score = 1;
+        Tuple<String, Integer> element = null;
+        for (Tuple<String, Integer> t : scoreboard) {
+            if (t.x.equals(player)) {
+                score += t.y;
+                element = t;
+            }
+        }
+        if (element != null) {
+            scoreboard.remove(element);
+        }
+        addScore(player, score);
+    }
+
     public ArrayList<Tuple<String, Integer>> getScores() {
         return scoreboard;
     }

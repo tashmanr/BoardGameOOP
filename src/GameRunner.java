@@ -13,6 +13,8 @@ public class GameRunner {
         Game game = new GameInitializer().getGame(pickGame(), getPlayers());
         scoreBoard = ScoreBoard.getInstance();
         game.start();
+        Player winner = game.getWinner();
+        scoreBoard.addGameResults(winner.getPlayerName());
     }
 
     public static GameRunner getInstance() {
