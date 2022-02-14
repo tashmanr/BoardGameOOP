@@ -5,19 +5,14 @@ enum GameOptions {
 }
 
 public class GameRunner {
-    private GameInitializer gameInitializer;
+    //private GameInitializer gameInitializer;
     private static GameRunner runnerInstance = null;
+    private ScoreBoard scoreBoard;
 
     private GameRunner() {
         Game game = new GameInitializer().getGame(pickGame(), getPlayers());
+        scoreBoard = ScoreBoard.getInstance();
         game.start();
-//        while (!isOver){
-//            //play turn
-//            if ()
-//            //check if game is over
-//            //switch turn
-//            player1Turn = !player1Turn;
-//        }
     }
 
     public static GameRunner getInstance(){
