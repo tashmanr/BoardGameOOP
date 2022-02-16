@@ -23,7 +23,7 @@ public class CheckersBoard extends Board {
     }
 
     @Override
-    public void loadBoard() {
+    public void loadNewBoard() {
         createPieces();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -42,6 +42,11 @@ public class CheckersBoard extends Board {
                 }
             }
         }
+    }
+
+    @Override
+    public void loadSavedBoard(String path) {
+
     }
 
     @Override

@@ -11,8 +11,16 @@ public abstract class Game {
     private boolean isOver = false;
     private Player winner;
 
-    public void loadGame() {
-        board.loadBoard();
+    public void loadGame(boolean newGame) {
+        if (newGame) {
+            board.loadNewBoard();
+        }
+        else board.loadSavedBoard(getSavedBoard());
+    }
+
+    public String getSavedBoard(){
+        return "";
+        //TODO: write function to get saved board, create interface for boards db, etc similar to scores
     }
 
     public void setPlayers(Player p1, Player p2) {
@@ -34,7 +42,7 @@ public abstract class Game {
             //switch turn
             player1Turn = !player1Turn;
         }
-        // TODO: need to define logic to declar winner
+        // TODO: need to define logic to declare winner
         if (player1Turn) {
             winner = player1;
         } else {

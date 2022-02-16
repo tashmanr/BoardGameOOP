@@ -1,8 +1,9 @@
-import model.GameRunner;
+import io.TerminalIO;
+import ui.CLI;
 
 public class Main {
     public static void main(String[] args) {
-
-        GameRunner gameRunner = GameRunner.getInstance();
+        CLI cli = new CLI(new TerminalIO());
+        cli.start();
     }
 }

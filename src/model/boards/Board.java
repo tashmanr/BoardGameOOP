@@ -18,7 +18,9 @@ public abstract class Board {
 
     protected abstract void createPieces();
 
-    public abstract void loadBoard();
+    public abstract void loadNewBoard();
+
+    public abstract void loadSavedBoard(String path);
 
     public GamePiece[][] getBoard() {
         return pieces;

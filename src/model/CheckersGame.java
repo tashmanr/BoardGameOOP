@@ -7,8 +7,4 @@ public class CheckersGame extends Game {
         this.board = new CheckersBoard();
     }
 
-//    @Override
-//    public void start() {
-//        //function to start game
-//    }
 }
