@@ -20,7 +20,7 @@ public abstract class Board {
 
     public abstract void loadNewBoard();
 
-    public abstract void loadSavedBoard(String path);
+    public abstract void loadSavedBoard(Tuple<HashMap<String, ArrayList<Tuple<Integer, Integer>>>, HashMap<String, ArrayList<Tuple<Integer, Integer>>>> teams);
 
     public GamePiece[][] getBoard() {
         return pieces;

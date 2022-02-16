@@ -5,6 +5,7 @@ import model.pieces.KingPiece;
 import model.pieces.ManPiece;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CheckersBoard extends Board {
     ManPiece men1;
@@ -45,7 +46,30 @@ public class CheckersBoard extends Board {
     }
 
     @Override
-    public void loadSavedBoard(String path) {
+    public void loadSavedBoard(Tuple<HashMap<String, ArrayList<Tuple<Integer, Integer>>>, HashMap<String, ArrayList<Tuple<Integer, Integer>>>> teams) {
+        createPieces();
+        for (var entry : teams.x.entrySet()) {
+            for (var gp : team1.entrySet()) {
+                if (gp.getKey().toString().equals(entry.getKey())) {
+                    team1.put(gp.getKey(), entry.getValue());
+                    for (var t : entry.getValue()) {
+                        pieces[t.x][t.y] = gp.getKey();
+                    }
+                    break;
+                }
+            }
+        }
+        for (var entry : teams.y.entrySet()) {
+            for (var gp : team2.entrySet()) {
+                if (gp.getKey().toString().equals(entry.getKey())) {
+                    team2.put(gp.getKey(), entry.getValue());
+                    for (var t : entry.getValue()) {
+                        pieces[t.x][t.y] = gp.getKey();
+                    }
+                    break;
+                }
+            }
+        }
 
     }
 

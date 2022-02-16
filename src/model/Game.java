@@ -1,26 +1,39 @@
 package model;
 
 import model.boards.Board;
+import model.pieces.GamePiece;
 import model.players.Player;
+import savedGames.ISavedGamesDatabase;
+import savedGames.SavedGamesDatabaseCSV;
 
-public abstract class Game {
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Game {
     protected Board board;
     protected Player player1;
     protected Player player2;
     private boolean player1Turn = true;
     private boolean isOver = false;
     private Player winner;
+    private ISavedGamesDatabase sgdb = null;
+
+    public Game() {
+        sgdb = new SavedGamesDatabaseCSV();
+    }
 
     public void loadGame(boolean newGame) {
         if (newGame) {
             board.loadNewBoard();
-        }
-        else board.loadSavedBoard(getSavedBoard());
+        } else board.loadSavedBoard(getSavedBoard());
     }
 
-    public String getSavedBoard(){
-        return "";
-        //TODO: write function to get saved board, create interface for boards db, etc similar to scores
+    public Tuple<HashMap<String, ArrayList<Tuple<Integer, Integer>>>, HashMap<String, ArrayList<Tuple<Integer, Integer>>>> getSavedBoard() {
+        return sgdb.getData();
+    }
+
+    public void saveBoard() {
+        sgdb.saveData(board.getTeam(1), board.getTeam(2));
     }
 
     public void setPlayers(Player p1, Player p2) {
