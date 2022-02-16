@@ -1,3 +1,5 @@
+package model.pieces;
+
 import java.util.ArrayList;
 
 public abstract class GamePiece {

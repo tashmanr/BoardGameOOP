@@ -1,3 +1,8 @@
+package model.boards;
+
+import model.Tuple;
+import model.pieces.GamePiece;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

@@ -1,3 +1,10 @@
+package model;
+
+import model.players.ComputerPlayer;
+import model.players.HumanPlayer;
+import model.players.Player;
+import scores.ScoreBoard;
+
 enum GameOptions {
     // possible to add new game options once implemented
     CHECKERS,
@@ -5,7 +12,7 @@ enum GameOptions {
 }
 
 public class GameRunner {
-    //private GameInitializer gameInitializer;
+    //private model.GameInitializer gameInitializer;
     private static GameRunner runnerInstance = null;
     private ScoreBoard scoreBoard;
 

@@ -1,3 +1,9 @@
+package model.boards;
+
+import model.Tuple;
+import model.pieces.KingPiece;
+import model.pieces.ManPiece;
+
 import java.util.ArrayList;
 
 public class CheckersBoard extends Board {

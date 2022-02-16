@@ -1,4 +1,8 @@
-public class ManPiece extends GamePiece{
+package model.pieces;
+
+import model.pieces.GamePiece;
+
+public class ManPiece extends GamePiece {
 
     public ManPiece(Integer team) {
         super(team);

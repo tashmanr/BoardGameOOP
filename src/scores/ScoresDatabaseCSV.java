@@ -1,3 +1,5 @@
+package scores;
+import model.Tuple;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;

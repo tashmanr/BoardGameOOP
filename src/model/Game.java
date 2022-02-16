@@ -1,3 +1,8 @@
+package model;
+
+import model.boards.Board;
+import model.players.Player;
+
 public abstract class Game {
     protected Board board;
     protected Player player1;

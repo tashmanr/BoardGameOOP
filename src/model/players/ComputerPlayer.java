@@ -1,4 +1,9 @@
-public class ComputerPlayer extends Player{
+package model.players;
+
+import model.Game;
+import model.Tuple;
+
+public class ComputerPlayer extends Player {
     /**
      * Updates the game state to take a move for the current player.
      * @param game	the game to update.

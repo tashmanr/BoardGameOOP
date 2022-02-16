@@ -1,3 +1,8 @@
+package model.players;
+
+import model.Game;
+import model.Tuple;
+
 /**
   * This class represents a player of the game.
   */

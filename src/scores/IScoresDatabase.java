@@ -1,3 +1,7 @@
+package scores;
+
+import model.Tuple;
+
 import java.util.ArrayList;
 
 public interface IScoresDatabase {

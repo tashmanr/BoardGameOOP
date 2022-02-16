@@ -1,11 +1,13 @@
+package model;
+
+import model.players.Player;
+
 public class GameInitializer {
 
     public Game getGame(GameOptions option, Tuple<Player, Player> players) {
-        Game game;
+        Game game = null;
         if (option == GameOptions.CHECKERS) {
             game = new CheckersGame();
-        } else {
-            game = new DummyGame();
         }
         game.loadGame();
         game.setPlayers(players.x, players.y);
