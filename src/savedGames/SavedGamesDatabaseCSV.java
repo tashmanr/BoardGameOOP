@@ -20,17 +20,7 @@ public class SavedGamesDatabaseCSV implements ISavedGamesDatabase {
     }
 
     private void createFile() {
-        try {
-            gameFile = new File(fileName);
-            if (gameFile.createNewFile()) {
-                System.out.println("Created file successfully");
-            } else {
-                System.out.println("File already exists");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred");
-            e.printStackTrace();
-        }
+        gameFile = new File(fileName);
     }
 
     @Override

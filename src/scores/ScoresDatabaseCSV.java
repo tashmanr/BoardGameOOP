@@ -1,5 +1,7 @@
 package scores;
+
 import model.Tuple;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,17 +15,7 @@ public class ScoresDatabaseCSV implements IScoresDatabase {
     }
 
     private void createFile() {
-        try {
-            scoresFile = new File(fileName);
-            if (scoresFile.createNewFile()) {
-                System.out.println("Created file successfully");
-            } else {
-                System.out.println("File already exists");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred");
-            e.printStackTrace();
-        }
+        scoresFile = new File(fileName);
     }
 
     @Override
@@ -34,7 +26,6 @@ public class ScoresDatabaseCSV implements IScoresDatabase {
                 writer.write(t.x + "," + t.y.toString() + "\n");
             }
             writer.close();
-            System.out.println("Data saved successfully");
         } catch (IOException e) {
             System.out.println("An error occurred");
             e.printStackTrace();
