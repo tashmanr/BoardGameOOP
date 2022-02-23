@@ -1,7 +1,7 @@
 package model;
 
+import io.DefaultIO;
 import model.boards.Board;
-import model.pieces.GamePiece;
 import model.players.Player;
 import savedGames.ISavedGamesDatabase;
 import savedGames.SavedGamesDatabaseCSV;
@@ -17,9 +17,11 @@ public class Game {
     private boolean isOver = false;
     private Player winner;
     private ISavedGamesDatabase sgdb = null;
+    private DefaultIO dio;
 
-    public Game() {
+    public Game(DefaultIO dio) {
         sgdb = new SavedGamesDatabaseCSV();
+        this.dio = dio;
     }
 
     public void loadGame(boolean newGame) {
@@ -44,8 +46,7 @@ public class Game {
     public void start() {
         while (!isOver) {
             //play turn
-            System.out.print(board);
-            System.out.print("\n");
+            dio.write(board.toString());
             if (player1Turn) {
                 player1.makeMove(this);
             } else {

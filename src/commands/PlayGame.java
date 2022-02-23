@@ -20,7 +20,7 @@ public class PlayGame extends Command {
         GameOptions o = pickGame();
         Tuple<Player, Player> players = getPlayers();
         boolean newGame = wantsNewGame();
-        GameRunner gameRunner = GameRunner.getInstance(players, o, newGame);
+        GameRunner gameRunner = GameRunner.getInstance(players, o, newGame, dio);
     }
 
     private boolean wantsNewGame() {
