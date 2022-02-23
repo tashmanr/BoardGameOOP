@@ -52,15 +52,14 @@ public class Game {
                 player2.makeMove(this);
             }
             //check if game is over
-            isOver = true;
             //switch turn
             player1Turn = !player1Turn;
         }
-        // TODO: need to define logic to declare winner
-        if (player1Turn) {
-            winner = player1;
-        } else {
+        // if player1 has no more pieces left, player 2 wins, else player1
+        if (board.getTeam(1).isEmpty()) {
             winner = player2;
+        } else {
+            winner = player1;
         }
     }
 
