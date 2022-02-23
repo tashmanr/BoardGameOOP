@@ -14,10 +14,10 @@ public class HumanPlayer extends Player {
     private Scanner sc;
     private String playerName = "Human";
 
-    public HumanPlayer(){
+    public HumanPlayer(String name){
         // Using Scanner for Getting Input from User
         this.sc = new Scanner(System.in);
-        // TODO: need to get player to input name
+        playerName = name;
     }
     
     public Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> makeMove(Game game){

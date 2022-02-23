@@ -4,9 +4,8 @@ import io.DefaultIO;
 import model.GameOptions;
 import model.GameRunner;
 import model.Tuple;
-import model.players.ComputerPlayer;
-import model.players.HumanPlayer;
 import model.players.Player;
+import model.players.PlayerInitializer;
 
 import java.util.EnumSet;
 
@@ -74,13 +73,16 @@ public class PlayGame extends Command {
             players = Integer.parseInt(input);
             firstTime = false;
         }
-        Player p1 = new HumanPlayer();
-        Player p2;
-        if (players == 1) {
-            p2 = new ComputerPlayer();
-        } else {
-            p2 = new HumanPlayer();
+        String name1 = getName(1);
+        String name2 = "";
+        if (players == 2){
+            name2 = getName(2);
         }
-        return new Tuple<>(p1, p2);
+        return new PlayerInitializer().getPlayers(players, name1, name2);
+    }
+
+    private String getName(int player){
+        dio.write("Please enter name for player " + player);
+        return dio.read();
     }
 }

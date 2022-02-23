@@ -26,7 +26,7 @@ public class CLI {
             // show options
             int i = 1;
             for (Command c : commands) {
-                dio.write(String.valueOf(i) + ". " + c.description);
+                dio.write(i + ". " + c.description);
                 i++;
             }
             // receive option choice
