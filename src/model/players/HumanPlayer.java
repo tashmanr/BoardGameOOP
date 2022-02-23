@@ -32,7 +32,7 @@ public class HumanPlayer extends Player {
 
             System.out.print(str);
             System.out.print("\n\n");
-            System.out.print(arrOfStr.length);
+            System.out.print(arrOfStr.length+"\n");
 
             if(arrOfStr.length != 4){
                 System.out.print("Incorrect Input! Try again! \n");

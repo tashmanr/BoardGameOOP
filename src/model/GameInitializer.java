@@ -9,6 +9,7 @@ public class GameInitializer {
         if (option == GameOptions.CHECKERS) {
             game = new CheckersGame();
         }
+        assert game != null;
         game.loadGame(newGame);
         game.setPlayers(players.x, players.y);
         return game;

@@ -1,7 +1,6 @@
 package model;
 
 import model.players.Player;
-import savedGames.ISavedGamesDatabase;
 import scores.ScoreBoard;
 
 public class GameRunner {
