@@ -1,1 +1,4 @@
+Lola,8
+Becca,6
 Computer,2
+Dor,1

@@ -52,7 +52,6 @@ public class SavedGamesDatabaseCSV implements ISavedGamesDatabase {
                 }
             }
             writer.close();
-            System.out.println("Data saved successfully");
         } catch (IOException e) {
             System.out.println("An error occurred");
             e.printStackTrace();

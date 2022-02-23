@@ -52,6 +52,7 @@ public class Game {
                 player2.makeMove(this);
             }
             //check if game is over
+            isOver = true;
             //switch turn
             player1Turn = !player1Turn;
         }

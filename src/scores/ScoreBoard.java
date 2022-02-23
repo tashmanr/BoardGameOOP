@@ -3,6 +3,8 @@ package scores;
 import model.Tuple;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ScoreBoard {
     private static ScoreBoard scoreBoardInstance = null;
@@ -23,6 +25,8 @@ public class ScoreBoard {
 
     public void addScore(String player, Integer score) {
         scoreboard.add(new Tuple<>(player, score));
+        Comparator<Tuple<String, Integer>> descComparator = (t1, t2) -> t2.y - t1.y;
+        Collections.sort(scoreboard, descComparator);
         db.saveData(scoreboard);
     }
 
