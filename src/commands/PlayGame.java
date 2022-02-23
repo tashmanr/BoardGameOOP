@@ -20,7 +20,7 @@ public class PlayGame extends Command {
         GameOptions o = pickGame();
         Tuple<Player, Player> players = getPlayers();
         boolean newGame = wantsNewGame();
-        GameRunner gameRunner = GameRunner.getInstance(players, o, newGame, dio);
+        GameRunner.getInstance(players, o, newGame, dio);
     }
 
     private boolean wantsNewGame() {
@@ -46,7 +46,7 @@ public class PlayGame extends Command {
             dio.write("Please pick a game");
             int i = 1;
             for (GameOptions o : options) {
-                dio.write(String.valueOf(i) + ". " + o);
+                dio.write(i + ". " + o);
                 i++;
             }
             // receive option choice
