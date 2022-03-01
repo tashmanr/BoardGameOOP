@@ -9,7 +9,9 @@ public abstract class GamePiece {
     protected GamePiece(Integer team) {
         this.team = team;
     }
-
+    public Integer getTeam(){
+        return team;
+    }
     public ArrayList<Integer> getMoveDirection() {
         return moves;
     }

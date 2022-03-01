@@ -42,7 +42,7 @@ public abstract class Board {
         }
     }
 
-    protected abstract boolean isLegalMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end);
+    public abstract boolean isLegalMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end);
     
     @Override
     public String toString() {

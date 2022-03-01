@@ -8,13 +8,11 @@ public class ManPiece extends GamePiece {
         super(team);
         if (team == 1){
             // white
-            moves.add(CheckerPieceOptions.RightUp.toInt());
-            moves.add(CheckerPieceOptions.LeftUp.toInt());
+            moves.add(CheckerPieceOptions.Up.toInt());
         }
         else{
             //black
-            moves.add(CheckerPieceOptions.RightDown.toInt());
-            moves.add(CheckerPieceOptions.LeftDown.toInt());
+            moves.add(CheckerPieceOptions.Down.toInt());
         }
     }
     

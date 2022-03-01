@@ -2,7 +2,7 @@ package model.pieces;
 
 public enum CheckerPieceOptions {
     // Possible moves for piece in  game
-    RightUp(0), LeftUp(1), RightDown(2), LeftDown(3);
+    Up(0), Down(1), Invalid(-1);
 
     private final int value;
 
