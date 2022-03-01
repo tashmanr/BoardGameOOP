@@ -17,13 +17,11 @@ public class CheckersGame extends Game {
 
     /***
      * get the direction of the move entered
-     * @param move a tuple of the move (start, end)
+     * @param start a tuple of the move (start, end)
+     * @param end a tuple of the move (start, end)
      * @return CheckersPieceOptions enum represents the direction of the move
      */
-    private CheckerPieceOptions getMoveDirection(Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move){
-        Tuple<Integer,Integer> start = move.x;
-        Tuple<Integer,Integer> end = move.y;
-
+    private CheckerPieceOptions getMoveDirection(Tuple<Integer,Integer> start, Tuple<Integer,Integer> end){
         if (start.x > end.x){
             return CheckerPieceOptions.Up;
         }
@@ -38,44 +36,56 @@ public class CheckersGame extends Game {
 
 
     @Override
-    public Boolean checkMoveLegal(Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move, Player player){
-        Tuple<Integer,Integer> start = move.x;
-        Tuple<Integer,Integer> end = move.y;
+    public Boolean checkMoveLegal(ArrayList<Tuple<Integer,Integer>> moves, Player player){
 
-        // check if end position is empty
-        if ( board.getPieceByLocation(end) != null ){
-            return false;
-        }
+        int move_index = 0; // the index of the move in arraylist moves
+        Tuple<Integer,Integer> start = moves.get(move_index);
+        move_index++;
+
         // get the piece in start position
-        GamePiece piece = board.getPieceByLocation(move.x);
-        if (piece == null){
+        GamePiece movingPiece = board.getPieceByLocation(start);
+        if (movingPiece == null){
             return false;
         }
 
-        // check this piece can do this move
-        ArrayList<Integer> moves = piece.getMoveDirection();
+        // get moving piece possible direction of movement
+        ArrayList<Integer> directions = movingPiece.getMoveDirection();
 
-        //determine the direction of this move
-        CheckerPieceOptions moveDirection = getMoveDirection(move);
+        do{
+            Tuple<Integer,Integer> next = moves.get(move_index);
 
-        // check if this moveDirection is valid
-        if (moves.contains(moveDirection.toInt())){
-            // the direction is valid
-            int jumpNumber = Math.abs(start.x - end.x);
-            if (jumpNumber == 1){
-                board.makeMove(start, end);
-                return true;
-            }
-            else{
-                //Tuple<Integer,Integer>
-                GamePiece consumedPiece; // TODO
+            // check if next position is empty
+            if ( board.getPieceByLocation(next) != null ){
+                return false;
             }
 
+            //determine the direction of this move
+            CheckerPieceOptions moveDirection = getMoveDirection(start, next);
 
-        }else{
-            // the direction of this move is invalid for this piece
-            return false;
-        }
+            // check if this moveDirection is valid for the gamePiece
+            if (directions.contains(moveDirection.toInt())){
+                int jumpNumber = Math.abs(start.x - next.x);
+                if (jumpNumber == 1){
+                    move_index++;
+                }
+                else{
+                    Tuple<Integer,Integer> middlePlace = new Tuple((start.x + next.x)/2 , (start.y + next.y)/2);
+                    GamePiece consumedPiece = board.getPieceByLocation(middlePlace);
+                    if(consumedPiece == null){
+                        return false;
+                    }
+                    if(consumedPiece.getTeam() == movingPiece.getTeam()){
+                        return false;
+                    }
+                    move_index++;
+                }
+            }
+            //TODO change the start and next position
+            //start =
+
+
+        }while(move_index < moves.size());
+    //TODO - make all the moves in the list
 
     return false;
 
