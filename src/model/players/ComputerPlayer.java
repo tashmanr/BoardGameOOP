@@ -12,10 +12,13 @@ public class ComputerPlayer extends Player {
         strategy = s;
     }
 
-    private ArrayList<Tuple<Tuple<Integer, Integer>, Tuple<Integer, Integer>>> getAllMoves() {
-        ArrayList<Tuple<Tuple<Integer, Integer>, Tuple<Integer, Integer>>> moves = new ArrayList<>();
+    private ArrayList<ArrayList<Tuple<Integer,Integer>>> getAllMoves() {
+        ArrayList<ArrayList<Tuple<Integer,Integer>>> moves = new ArrayList<>();
         // Todo: actually calculate moves, this is temporary
-        moves.add(new Tuple<>(new Tuple<>(1, 1), new Tuple<>(1, 2)));
+        ArrayList<Tuple<Integer,Integer>> tmp = new ArrayList<>();
+        tmp.add(new Tuple<>(1,1));
+        tmp.add(new Tuple<>(2,2));
+        moves.add(tmp);
         return moves;
     }
 
