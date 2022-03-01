@@ -65,29 +65,27 @@ public class CheckersGame extends Game {
             // check if this moveDirection is valid for the gamePiece
             if (directions.contains(moveDirection.toInt())){
                 int jumpNumber = Math.abs(start.x - next.x);
-                if (jumpNumber == 1){
-                    move_index++;
-                }
-                else{
-                    Tuple<Integer,Integer> middlePlace = new Tuple((start.x + next.x)/2 , (start.y + next.y)/2);
+
+                if (jumpNumber != 1) {
+                    Tuple<Integer, Integer> middlePlace = new Tuple((start.x + next.x) / 2, (start.y + next.y) / 2);
                     GamePiece consumedPiece = board.getPieceByLocation(middlePlace);
-                    if(consumedPiece == null){
+                    if (consumedPiece == null) {
                         return false;
                     }
-                    if(consumedPiece.getTeam() == movingPiece.getTeam()){
+                    if (consumedPiece.getTeam() == movingPiece.getTeam()) {
                         return false;
                     }
-                    move_index++;
                 }
+                move_index++;
             }
             //TODO change the start and next position
-            //start =
-
-
+            start = moves.get(move_index-1);
         }while(move_index < moves.size());
-    //TODO - make all the moves in the list
+    for (int i = 0; i < moves.size()-1; i++){
+        board.makeMove(moves.get(i), moves.get(i+1));
+    }
 
-    return false;
+    return true;
 
     }
 }
