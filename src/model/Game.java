@@ -65,12 +65,7 @@ public class Game {
         }
     }
 
-    public Boolean checkMoveLegal(Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move, Player player){
-        Tuple<Integer,Integer> start = move.x;
-        Tuple<Integer,Integer> end = move.y;
-
-
-    }
+    public Boolean checkMoveLegal(Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move, Player player){return false;}
 
     public Player getWinner() {
         return winner;
