@@ -1,5 +1,7 @@
 package model.pieces;
 
+import model.Tuple;
+
 import java.util.ArrayList;
 
 public abstract class GamePiece {
@@ -9,12 +11,16 @@ public abstract class GamePiece {
     protected GamePiece(Integer team) {
         this.team = team;
     }
-    public Integer getTeam(){
+
+    public Integer getTeam() {
         return team;
     }
+
     public ArrayList<Integer> getMoveDirection() {
         return moves;
     }
 
-	abstract public String toString();
+    public abstract ArrayList<Tuple<Integer,Integer>> calculateMoves(Tuple<Integer, Integer> location, GamePiece[][] board);
+
+    abstract public String toString();
 }
