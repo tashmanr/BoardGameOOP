@@ -5,8 +5,10 @@ import model.pieces.GamePiece;
 public class KingPiece extends GamePiece {
     public KingPiece(Integer team) {
         super(team);
-        moves.add(1);
-        moves.add(-1);
+        moves.add(CheckerPieceOptions.RightUp.toInt());
+        moves.add(CheckerPieceOptions.LeftUp.toInt());
+        moves.add(CheckerPieceOptions.RightDown.toInt());
+        moves.add(CheckerPieceOptions.LeftDown.toInt());
     }
 
     @Override

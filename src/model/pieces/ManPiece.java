@@ -7,10 +7,14 @@ public class ManPiece extends GamePiece {
     public ManPiece(Integer team) {
         super(team);
         if (team == 1){
-            moves.add(1);
+            // white
+            moves.add(CheckerPieceOptions.RightUp.toInt());
+            moves.add(CheckerPieceOptions.LeftUp.toInt());
         }
         else{
-            moves.add(-1);
+            //black
+            moves.add(CheckerPieceOptions.RightDown.toInt());
+            moves.add(CheckerPieceOptions.LeftDown.toInt());
         }
     }
     
