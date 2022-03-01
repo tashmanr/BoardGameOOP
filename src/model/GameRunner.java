@@ -7,9 +7,12 @@ import scores.ScoreBoard;
 public class GameRunner {
     private static GameRunner runnerInstance = null;
     private ScoreBoard scoreBoard;
+    private Game game;
+    private GameInitializer gameInitializer;
 
     private GameRunner(Tuple<Player, Player> players, GameOptions o, boolean newGame, DefaultIO dio) {
-        Game game = new GameInitializer().getGame(o, players, newGame, dio);
+        gameInitializer = new GameInitializer();
+        game = gameInitializer.getGame(o, players, newGame, dio);
         scoreBoard = ScoreBoard.getInstance();
         game.start();
         Player winner = game.getWinner();

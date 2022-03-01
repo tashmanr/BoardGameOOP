@@ -10,6 +10,8 @@ import model.players.PlayerInitializer;
 import java.util.EnumSet;
 
 public class PlayGame extends Command {
+    GameRunner gameRunner;
+    PlayerInitializer playerInitializer;
 
     public PlayGame(DefaultIO dio) {
         super("Play a Game", dio);
@@ -20,7 +22,7 @@ public class PlayGame extends Command {
         GameOptions o = pickGame();
         Tuple<Player, Player> players = getPlayers();
         boolean newGame = wantsNewGame();
-        GameRunner.getInstance(players, o, newGame, dio);
+        gameRunner = GameRunner.getInstance(players, o, newGame, dio);
     }
 
     private boolean wantsNewGame() {
@@ -78,7 +80,8 @@ public class PlayGame extends Command {
         if (players == 2){
             name2 = getName(2);
         }
-        return new PlayerInitializer().getPlayers(players, name1, name2);
+        playerInitializer = new PlayerInitializer();
+        return playerInitializer.getPlayers(players, name1, name2);
     }
 
     private String getName(int player){
