@@ -2,6 +2,8 @@ package model.players;
 
 import model.Game;
 import model.Tuple;
+import model.boards.Board;
+
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -21,7 +23,7 @@ public class HumanPlayer extends Player {
         playerName = name;
     }
     
-    public ArrayList<Tuple<Integer,Integer>> makeMove(Game game){
+    public ArrayList<Tuple<Integer,Integer>> makeMove(Board board){
         ArrayList<Tuple<Integer,Integer>> move = new ArrayList<Tuple<Integer,Integer>>();
 
         Boolean valid_input = false;

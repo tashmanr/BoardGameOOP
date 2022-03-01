@@ -2,6 +2,7 @@ package model.players;
 
 import model.Game;
 import model.Tuple;
+import model.boards.Board;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class ComputerPlayer extends Player {
         strategy = s;
     }
 
-    private ArrayList<ArrayList<Tuple<Integer,Integer>>> getAllMoves() {
+    private ArrayList<ArrayList<Tuple<Integer,Integer>>> getAllMoves(Board board) {
         ArrayList<ArrayList<Tuple<Integer,Integer>>> moves = new ArrayList<>();
         // Todo: actually calculate moves, this is temporary
         ArrayList<Tuple<Integer,Integer>> tmp = new ArrayList<>();
@@ -27,8 +28,8 @@ public class ComputerPlayer extends Player {
      *
      * @param game the game to update.
      */
-    public ArrayList<Tuple<Integer,Integer>> makeMove(Game game) {
-        return strategy.pickMove(getAllMoves());
+    public ArrayList<Tuple<Integer,Integer>> makeMove(Board board) {
+        return strategy.pickMove(getAllMoves(board));
     }
 
     @Override

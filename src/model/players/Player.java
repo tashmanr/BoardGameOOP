@@ -1,7 +1,8 @@
 package model.players;
 
-import model.Game;
 import model.Tuple;
+import model.boards.Board;
+
 import java.util.ArrayList;
 
 /**
@@ -10,9 +11,9 @@ import java.util.ArrayList;
 public abstract class Player {
 	/**
 	 * Updates the game state to take a move for the current player.
-	 * @param game	the game to update.
+	 * @param board	the board to update.
 	 */
-	public abstract ArrayList<Tuple<Integer,Integer>> makeMove(Game game);
+	public abstract ArrayList<Tuple<Integer,Integer>> makeMove(Board board);
 
 	@Override
 	public String toString() {
