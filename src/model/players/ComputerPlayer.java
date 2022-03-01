@@ -24,7 +24,7 @@ public class ComputerPlayer extends Player {
      *
      * @param game the game to update.
      */
-    public Tuple<Tuple<Integer, Integer>, Tuple<Integer, Integer>> makeMove(Game game) {
+    public ArrayList<Tuple<Integer,Integer>> makeMove(Game game) {
         return strategy.pickMove(getAllMoves());
     }
 

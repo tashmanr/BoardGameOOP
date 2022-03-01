@@ -67,6 +67,7 @@ public class CheckersGame extends Game {
                 return true;
             }
             else{
+                //Tuple<Integer,Integer>
                 GamePiece consumedPiece; // TODO
             }
 

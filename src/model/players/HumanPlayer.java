@@ -2,6 +2,7 @@ package model.players;
 
 import model.Game;
 import model.Tuple;
+import java.util.ArrayList;
 
 import java.util.Scanner;
 
@@ -20,8 +21,9 @@ public class HumanPlayer extends Player {
         playerName = name;
     }
     
-    public Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> makeMove(Game game){
-        
+    public ArrayList<Tuple<Integer,Integer>> makeMove(Game game){
+        ArrayList<Tuple<Integer,Integer>> move = new ArrayList<Tuple<Integer,Integer>>();
+
         Boolean valid_input = false;
         String[] arrOfStr;
         do{
@@ -34,6 +36,8 @@ public class HumanPlayer extends Player {
             System.out.print("\n\n");
             System.out.print(arrOfStr.length+"\n");
 
+            // TODO add if there are multiple jumps
+
             if(arrOfStr.length != 4){
                 System.out.print("Incorrect Input! Try again! \n");
             }
@@ -42,10 +46,8 @@ public class HumanPlayer extends Player {
             }
         }while(!valid_input);
 
-
-        Tuple<Integer, Integer> start = new Tuple(Integer.parseInt(arrOfStr[0]), Integer.parseInt(arrOfStr[1]));
-        Tuple<Integer, Integer> end = new Tuple(Integer.parseInt(arrOfStr[2]), Integer.parseInt(arrOfStr[3]));
-        Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move = new Tuple<>(start, end);
+        move.add(new Tuple(Integer.parseInt(arrOfStr[0]), Integer.parseInt(arrOfStr[1])));
+        move.add(new Tuple(Integer.parseInt(arrOfStr[2]), Integer.parseInt(arrOfStr[3])));
         return move;
     }
 

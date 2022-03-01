@@ -48,10 +48,10 @@ public class Game {
             //play turn
             dio.write(board.toString());
             if (player1Turn) {
-                Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move = player1.makeMove(this);
+                ArrayList<Tuple<Integer,Integer>> move = player1.makeMove(this);
 
             } else {
-                Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move = player2.makeMove(this);
+                ArrayList<Tuple<Integer,Integer>> move = player2.makeMove(this);
             }
             //check if game is over
             //switch turn
