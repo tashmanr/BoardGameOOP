@@ -7,7 +7,9 @@ public class PlayerInitializer {
         Player p1 = new HumanPlayer(name1);
         Player p2;
         if (players == 1) {
-            p2 = new ComputerPlayer();
+            // Todo: let player choose strategy for computer (easy, difficult, etc)
+            IComputerStrategy strategy = new FirstOption();
+            p2 = new ComputerPlayer(strategy);
         } else {
             p2 = new HumanPlayer(name2);
         }
