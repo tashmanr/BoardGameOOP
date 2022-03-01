@@ -75,6 +75,10 @@ public class CheckersBoard extends Board {
 
     @Override
     protected boolean isLegalMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end) {
+        if (pieces[start.x][start.y] != null && pieces[end.x][end.y] == null){
+            // no piece in this place
+            return true;
+        }
         return false;
     }
 }

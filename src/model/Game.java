@@ -48,9 +48,10 @@ public class Game {
             //play turn
             dio.write(board.toString());
             if (player1Turn) {
-                player1.makeMove(this);
+                Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move = player1.makeMove(this);
+
             } else {
-                player2.makeMove(this);
+                Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move = player2.makeMove(this);
             }
             //check if game is over
             //switch turn
@@ -62,6 +63,13 @@ public class Game {
         } else {
             winner = player1;
         }
+    }
+
+    public Boolean checkMoveLegal(Tuple<Tuple<Integer,Integer>, Tuple<Integer,Integer>> move, Player player){
+        Tuple<Integer,Integer> start = move.x;
+        Tuple<Integer,Integer> end = move.y;
+
+
     }
 
     public Player getWinner() {

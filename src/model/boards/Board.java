@@ -67,4 +67,8 @@ public abstract class Board {
         temp += "-------------------------\n";
         return temp;
     }
+
+    public GamePiece getPieceByLocation(Tuple<Integer, Integer> location){
+        return pieces[location.x][location.y];
+    }
 }
