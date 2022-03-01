@@ -1,9 +1,10 @@
 import io.TerminalIO;
 import ui.CLI;
+import ui.UI;
 
 public class Main {
     public static void main(String[] args) {
-        CLI cli = new CLI(new TerminalIO());
-        cli.start();
+        UI ui = new CLI(new TerminalIO());
+        ui.start();
     }
 }

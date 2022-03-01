@@ -7,7 +7,7 @@ import commands.ViewScores;
 import io.DefaultIO;
 import java.util.ArrayList;
 
-public class CLI {
+public class CLI extends UI {
     protected ArrayList<Command> commands;
     protected DefaultIO dio;
 
@@ -19,6 +19,7 @@ public class CLI {
         commands.add(new ShutDown(dio));
     }
 
+    @Override
     public void start() {
         boolean indicator = true;
         while (indicator) { //as long as shut down has not been chosen, keep going
