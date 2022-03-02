@@ -32,6 +32,12 @@ public abstract class Board {
         } else return team2;
     }
 
+    /**
+     * Given a starting position and goal position, makes the move on the board.
+     * @param start the position of the piece making the move
+     * @param end the goal position of the piece after the move
+     * @return True if the move was completed successfully, false otherwise
+     */
     public abstract boolean makeMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end);
 
     public abstract boolean isLegalMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end);

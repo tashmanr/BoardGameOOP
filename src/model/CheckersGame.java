@@ -54,6 +54,11 @@ public class CheckersGame extends Game {
         do{
             Tuple<Integer,Integer> next = moves.get(move_index);
 
+            // check this move is legitimate on the board
+            if(!board.isLegalMove(start, next)){
+                return false;
+            }
+
             // check if next position is empty
             if ( board.getPieceByLocation(next) != null ){
                 return false;
@@ -81,9 +86,10 @@ public class CheckersGame extends Game {
             //TODO change the start and next position
             start = moves.get(move_index-1);
         }while(move_index < moves.size());
-    for (int i = 0; i < moves.size()-1; i++){
-        board.makeMove(moves.get(i), moves.get(i+1));
-    }
-    return true;
+
+        for (int i = 0; i < moves.size()-1; i++){
+            board.makeMove(moves.get(i), moves.get(i+1));
+        }
+        return true;
     }
 }
