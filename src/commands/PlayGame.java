@@ -77,14 +77,19 @@ public class PlayGame extends Command {
         }
         String name1 = getName(1);
         String name2 = "";
-        if (players == 2){
+        int level = 0;
+        if (players == 2) {
             name2 = getName(2);
+        } else {
+            dio.write("Choose playing level:\n1.Easy\n2.Hard");
+            String input = dio.read();
+            level = Integer.parseInt(input);
         }
         playerInitializer = new PlayerInitializer();
-        return playerInitializer.getPlayers(players, name1, name2);
+        return playerInitializer.getPlayers(players, name1, name2, level);
     }
 
-    private String getName(int player){
+    private String getName(int player) {
         dio.write("Please enter name for player " + player);
         return dio.read();
     }
