@@ -62,7 +62,11 @@ public abstract class Game {
             boolean played = false;
             while (!played && !shouldQuit) {
                 ArrayList<Tuple<Integer, Integer>> move = currentPlayer.makeMove(board);
-                if (move.size() == 1 && move.get(0).x == 0 && move.get(0).y == 0) {
+                if (move == null) {
+                    //player can't make any more moves, game over
+                    isOver = true;
+                    played = true;
+                } else if (move.size() == 1 && move.get(0).x == 0 && move.get(0).y == 0) {
                     shouldQuit = true;
                 } else {
                     if (checkMoveLegal(move, currentPlayer)) {
@@ -72,7 +76,7 @@ public abstract class Game {
                 }
             }
             //check if game is over
-            if (gameOver()){
+            if (!isOver && gameOver()) {
                 isOver = true;
             }
             //switch turn

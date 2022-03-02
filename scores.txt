@@ -1,4 +1,4 @@
 Lola,8
 Becca,6
-Computer,3
+Computer,6
 Dor,1
