@@ -15,6 +15,7 @@ public abstract class Game {
     protected Player player2;
     private boolean player1Turn = true;
     private boolean isOver = false;
+    private boolean shouldQuit = false;
     private Player winner;
     private ISavedGamesDatabase sgdb = null;
     private DefaultIO dio;
@@ -35,7 +36,18 @@ public abstract class Game {
     }
 
     public void saveBoard() {
-        sgdb.saveData(board.getTeam(1), board.getTeam(2));
+        boolean answered = false;
+        while (!answered) {
+            dio.write("Would you like to save your game? [y/n]");
+            String input = dio.read();
+            if (input.equals("y")) {
+                sgdb.saveData(board.getTeam(1), board.getTeam(2));
+                answered = true;
+            } else if (input.equals("n")){
+                answered = true;
+            }
+        }
+        //sgdb.saveData(board.getTeam(1), board.getTeam(2));
     }
 
     public void setPlayers(Player p1, Player p2) {
@@ -44,17 +56,31 @@ public abstract class Game {
     }
 
     public void start() {
-        while (!isOver) {
+        while (!isOver && !shouldQuit) {
             //play turn
             dio.write(board.toString());
-            if (player1Turn) {
-                ArrayList<Tuple<Integer,Integer>> move = player1.makeMove(board);
-            } else {
-                ArrayList<Tuple<Integer,Integer>> move = player2.makeMove(board);
+            boolean played = false;
+            while (!played) {
+                if (player1Turn) {
+                    ArrayList<Tuple<Integer, Integer>> move = player1.makeMove(board);
+                    if (checkMoveLegal(move, player1)) {
+                        played = true;
+                        makeMove(move, player1);
+                    }
+                } else {
+                    ArrayList<Tuple<Integer, Integer>> move = player2.makeMove(board);
+                    if (checkMoveLegal(move, player2)) {
+                        played = true;
+                        makeMove(move, player2);
+                    }
+                }
             }
             //check if game is over
             //switch turn
             player1Turn = !player1Turn;
+        }
+        if (shouldQuit) {
+            saveBoard();
         }
         // if player1 has no more pieces left, player 2 wins, else player1
         if (board.getTeam(1).isEmpty()) {
@@ -64,8 +90,9 @@ public abstract class Game {
         }
     }
 
-    public abstract Boolean makeMove(ArrayList<Tuple<Integer,Integer>> moves, Player player);
-    public abstract Boolean checkMoveLegal(ArrayList<Tuple<Integer,Integer>> moves, Player player);
+    public abstract Boolean makeMove(ArrayList<Tuple<Integer, Integer>> moves, Player player);
+
+    public abstract Boolean checkMoveLegal(ArrayList<Tuple<Integer, Integer>> moves, Player player);
 
     public Player getWinner() {
         return winner;
