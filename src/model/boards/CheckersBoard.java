@@ -107,6 +107,25 @@ public class CheckersBoard extends Board {
         }
         return false;
     }
+
+    public void upgradePiece(Integer x, Integer y) {
+        Tuple<Integer, Integer> t = new Tuple<>(x, y);
+        if (pieces[x][y] == men1) {
+            team1.get(men1).remove(t);
+            if (!team1.containsKey(king1)) {
+                team1.put(king1, new ArrayList<>());
+            }
+            team1.get(king1).add(t);
+            pieces[x][y] = king1;
+        } else if (pieces[x][y] == men2) {
+            team2.get(men2).remove(t);
+            if (!team2.containsKey(king2)) {
+                team2.put(king2, new ArrayList<>());
+            }
+            team2.get(king2).add(t);
+            pieces[x][y] = king2;
+        }
+    }
 }
 
 

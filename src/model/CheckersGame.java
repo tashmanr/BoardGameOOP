@@ -108,4 +108,9 @@ public class CheckersGame extends Game {
     public boolean gameOver() {
         return board.getTeam(1).isEmpty() || board.getTeam(2).isEmpty();
     }
+
+    private void kingMe(Integer x, Integer y) {
+        CheckersBoard b = (CheckersBoard) board;
+        b.upgradePiece(x, y);
+    }
 }
