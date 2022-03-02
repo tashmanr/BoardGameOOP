@@ -101,26 +101,30 @@ public class CheckersBoard extends Board {
 //            }
 //        }
     }
+
     @Override
-    public boolean makeMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end){
+    public boolean makeMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end) {
         GamePiece mover = pieces[start.x][start.y];
-        if (mover != null && isLegalMove(start, end)){
+        if (mover != null && isLegalMove(start, end)) {
             pieces[start.x][start.y] = null;
             pieces[end.x][end.y] = mover;
 
             // update the hashmap
-            teams.get(mover.getTeam()).get(mover).removeIf(n-> ((n.x == start.x) && (n.y==start.y)));
+            teams.get(mover.getTeam()).get(mover).removeIf(n -> ((n.x == start.x) && (n.y == start.y)));
             teams.get(mover.getTeam()).get(mover).add(end);
 
-            if(Math.abs(start.x - end.x) == 2){
+            if (Math.abs(start.x - end.x) == 2) {
                 // meaning there is a piece in between we need to eliminate
-                int axis_x = (start.x+end.x)/2;
-                int axis_y = (start.y + end.y)/2;
-                Tuple<Integer,Integer> removedLocation = new Tuple<>(axis_x,axis_y);
+                int axis_x = (start.x + end.x) / 2;
+                int axis_y = (start.y + end.y) / 2;
+                Tuple<Integer, Integer> removedLocation = new Tuple<>(axis_x, axis_y);
 
                 // update the hashmap
                 GamePiece removedPiece = getPieceByLocation(removedLocation);
-                teams.get(removedPiece.getTeam()).get(removedPiece).removeIf(n-> ((n.x == removedLocation.x) && (n.y==removedLocation.y)));
+                teams.get(removedPiece.getTeam()).get(removedPiece).removeIf(n -> ((n.x == removedLocation.x) && (n.y == removedLocation.y)));
+                if (teams.get(removedPiece.getTeam()).get(removedPiece).isEmpty()) {
+                    teams.get(removedPiece.getTeam()).remove(removedPiece);
+                }
                 pieces[axis_x][axis_y] = null;
             }
             return true;
@@ -129,15 +133,14 @@ public class CheckersBoard extends Board {
     }
 
 
-
     @Override
     public boolean isLegalMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end) {
         // check that positions are inside of board dimensions
-        if ( (0 <= start.x && start.x < size)  && (0 <= start.y && start.y < size) &&
-                (0 <= end.x && end.x < size) && ((0 <= end.y && end.y < size)) ){
+        if ((0 <= start.x && start.x < size) && (0 <= start.y && start.y < size) &&
+                (0 <= end.x && end.x < size) && ((0 <= end.y && end.y < size))) {
 
             // check that there is a piece in start and the end position is empty
-            if (pieces[start.x][start.y] != null && pieces[end.x][end.y] == null){
+            if (pieces[start.x][start.y] != null && pieces[end.x][end.y] == null) {
                 // no piece in this place
                 return true;
             }
@@ -148,36 +151,26 @@ public class CheckersBoard extends Board {
     public void upgradePiece(Integer x, Integer y) {
         Tuple<Integer, Integer> t = new Tuple<>(x, y);
         if (pieces[x][y] == men1) {
-            teams.get(1).get(men1).removeIf(n-> ((n.x == t.x) && (n.y==t.y)));
+            teams.get(1).get(men1).removeIf(n -> ((n.x.equals(t.x)) && (n.y.equals(t.y))));
             if (!teams.get(1).containsKey(king1)) {
                 teams.get(1).put(king1, new ArrayList<>());
             }
             teams.get(1).get(king1).add(t);
             pieces[x][y] = king1;
+            if (teams.get(1).get(men1).isEmpty()) {
+                teams.get(1).remove(men1);
+            }
         } else if (pieces[x][y] == men2) {
-            teams.get(2).get(men2).removeIf(n-> ((n.x == t.x) && (n.y==t.y)));
+            teams.get(2).get(men2).removeIf(n -> ((n.x.equals(t.x)) && (n.y.equals(t.y))));
             if (!teams.get(2).containsKey(king2)) {
                 teams.get(2).put(king2, new ArrayList<>());
             }
             teams.get(2).get(king2).add(t);
             pieces[x][y] = king2;
+            if (teams.get(2).get(men2).isEmpty()) {
+                teams.get(2).remove(men2);
+            }
         }
-
-//        if (pieces[x][y] == men1) {
-//            team1.get(men1).remove(t);
-//            if (!team1.containsKey(king1)) {
-//                team1.put(king1, new ArrayList<>());
-//            }
-//            team1.get(king1).add(t);
-//            pieces[x][y] = king1;
-//        } else if (pieces[x][y] == men2) {
-//            team2.get(men2).remove(t);
-//            if (!team2.containsKey(king2)) {
-//                team2.put(king2, new ArrayList<>());
-//            }
-//            team2.get(king2).add(t);
-//            pieces[x][y] = king2;
-//        }
     }
 }
 
