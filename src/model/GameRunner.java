@@ -17,6 +17,7 @@ public class GameRunner {
         game.start();
         Player winner = game.getWinner();
         if (winner != null) {
+            dio.write(winner.getPlayerName() + " is the winner!\n");
             scoreBoard.addGameResults(winner.getPlayerName());
         }
     }
