@@ -84,8 +84,6 @@ public class CheckersGame extends Game {
     for (int i = 0; i < moves.size()-1; i++){
         board.makeMove(moves.get(i), moves.get(i+1));
     }
-
     return true;
-
     }
 }

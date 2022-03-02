@@ -1,11 +1,14 @@
 package model.boards;
 
 import model.Tuple;
+import model.pieces.GamePiece;
 import model.pieces.KingPiece;
 import model.pieces.ManPiece;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.lang.Math;
 
 public class CheckersBoard extends Board {
     ManPiece men1;
@@ -72,6 +75,23 @@ public class CheckersBoard extends Board {
         }
 
     }
+    @Override
+    public boolean makeMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end){
+        GamePiece mover = pieces[start.x][start.y];
+        if (mover != null && isLegalMove(start, end)){
+            pieces[start.x][start.y] = null;
+            pieces[end.x][end.y] = mover;
+            if(Math.abs(start.x - end.x) == 2){
+                // meaning there is a piece in between we need to eliminate
+                int axis_x = (start.x+end.x)/2;
+                int axis_y = (start.y + end.y)/2;
+                pieces[axis_x][axis_y] = null;
+            }
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     public boolean isLegalMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end) {
@@ -88,6 +108,8 @@ public class CheckersBoard extends Board {
         return false;
     }
 }
+
+
 
 
 
