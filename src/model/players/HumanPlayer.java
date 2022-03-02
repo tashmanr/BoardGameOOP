@@ -19,7 +19,8 @@ public class HumanPlayer extends Player {
     private DefaultIO io;
     private String playerName = "Human";
 
-    public HumanPlayer(String name, DefaultIO io){
+    public HumanPlayer(String name, DefaultIO io, Integer team){
+        super(team);
         // Using Scanner for Getting Input from User
         //this.sc = new Scanner(System.in);
         playerName = name;

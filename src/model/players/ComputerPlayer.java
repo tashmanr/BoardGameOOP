@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class ComputerPlayer extends Player {
     private IComputerStrategy strategy;
 
-    public ComputerPlayer(IComputerStrategy s) {
+    public ComputerPlayer(IComputerStrategy s, Integer team) {
+        super(team);
         strategy = s;
     }
 
@@ -21,7 +22,7 @@ public class ComputerPlayer extends Player {
             for (int j = 0; j < board.size; j++) {
                 Tuple<Integer, Integer> t = new Tuple<>(i, j);
                 ArrayList<Tuple<Integer, Integer>> result = new ArrayList<>();
-                if (boardArray[i][j] != null && boardArray[i][j].getTeam() == 2) {//computerPlayer is ALWAYS team2
+                if (boardArray[i][j] != null && boardArray[i][j].getTeam().equals(team)) {
                     result = boardArray[i][j].calculateMoves(t, boardArray);
                 }
                 for (var v : result) {

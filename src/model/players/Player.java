@@ -9,6 +9,11 @@ import java.util.ArrayList;
   * This class represents a player of the game.
   */
 public abstract class Player {
+	protected Integer team;
+
+	public Player(Integer t){
+		team = t;
+	}
 	/**
 	 * Updates the game state to take a move for the current player.
 	 * @param board	the board to update.
@@ -21,4 +26,8 @@ public abstract class Player {
 	}
 
 	public abstract String getPlayerName();
+
+	public Integer getTeam(){
+		return team;
+	}
 }
