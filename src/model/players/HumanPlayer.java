@@ -30,26 +30,30 @@ public class HumanPlayer extends Player {
         String[] arrOfStr;
         do{
             // the input needs to be in format 1,2 3,4 while 1,2 is starting pos and 3,4 is new desired position
-            System.out.print("please enter your move:\n");
+            System.out.print("please enter your move, if you finished entering the move enter 0, to exit the game enter -1:\n");
             String str= sc.nextLine();
-            arrOfStr = str.split("[ ,]+");
-
-            System.out.print(str);
-            System.out.print("\n\n");
-            System.out.print(arrOfStr.length+"\n");
-
-            // TODO add if there are multiple jumps
-
-            if(arrOfStr.length != 4){
-                System.out.print("Incorrect Input! Try again! \n");
+            if(str.equals("0")){
+                // the user finished entering his move
+                break;
+            }
+            else if(str.equals("-1")){
+                // the user wishes to exit the game
+                move.clear();
+                move.add(new Tuple(0,0));
+                break;
+                //return move;
             }
             else{
-                valid_input = true;
+                arrOfStr = str.split(",");
+                if(arrOfStr.length != 2){
+                    System.out.print("Incorrect Input! Try again! \n");
+                }
+                else{
+                    move.add(new Tuple(Integer.parseInt(arrOfStr[0]), Integer.parseInt(arrOfStr[1])));
+                }
             }
-        }while(!valid_input);
+        }while(true);
 
-        move.add(new Tuple(Integer.parseInt(arrOfStr[0]), Integer.parseInt(arrOfStr[1])));
-        move.add(new Tuple(Integer.parseInt(arrOfStr[2]), Integer.parseInt(arrOfStr[3])));
         return move;
     }
 
