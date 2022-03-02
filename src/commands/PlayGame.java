@@ -86,7 +86,7 @@ public class PlayGame extends Command {
             level = Integer.parseInt(input);
         }
         playerInitializer = new PlayerInitializer();
-        return playerInitializer.getPlayers(players, name1, name2, level);
+        return playerInitializer.getPlayers(players, name1, name2, level, dio);
     }
 
     private String getName(int player) {
