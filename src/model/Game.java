@@ -64,6 +64,7 @@ public class Game {
         }
     }
 
+    public Boolean makeMove(ArrayList<Tuple<Integer,Integer>> moves, Player player){return false;}
     public Boolean checkMoveLegal(ArrayList<Tuple<Integer,Integer>> moves, Player player){return false;}
 
     public Player getWinner() {

@@ -34,6 +34,20 @@ public class CheckersGame extends Game {
         }
     }
 
+    @Override
+    public Boolean makeMove(ArrayList<Tuple<Integer,Integer>> moves, Player player){
+        boolean legal = checkMoveLegal(moves, player);
+        if(legal){
+            for(int i=0; i< moves.size()-1; i++){
+                legal = board.makeMove(moves.get(i), moves.get(i+1));
+                if(!legal){
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public Boolean checkMoveLegal(ArrayList<Tuple<Integer,Integer>> moves, Player player){
@@ -87,9 +101,6 @@ public class CheckersGame extends Game {
             start = moves.get(move_index-1);
         }while(move_index < moves.size());
 
-        for (int i = 0; i < moves.size()-1; i++){
-            board.makeMove(moves.get(i), moves.get(i+1));
-        }
         return true;
     }
 }
