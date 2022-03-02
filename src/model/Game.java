@@ -14,10 +14,11 @@ public abstract class Game {
     protected Player player1;
     protected Player player2;
     private boolean player1Turn = true;
+    private Player currentPlayer;
     private boolean isOver = false;
     private boolean shouldQuit = false;
     private Player winner;
-    private ISavedGamesDatabase sgdb = null;
+    private ISavedGamesDatabase sgdb;
     private DefaultIO dio;
 
     public Game(DefaultIO dio) {
@@ -47,7 +48,6 @@ public abstract class Game {
                 answered = true;
             }
         }
-        //sgdb.saveData(board.getTeam(1), board.getTeam(2));
     }
 
     public void setPlayers(Player p1, Player p2) {
@@ -56,45 +56,39 @@ public abstract class Game {
     }
 
     public void start() {
+        currentPlayer = player1;
         while (!isOver && !shouldQuit) {
             //play turn
             dio.write(board.toString());
             boolean played = false;
             while (!played && !shouldQuit) {
-                if (player1Turn) {
-                    ArrayList<Tuple<Integer, Integer>> move = player1.makeMove(board);
-                    if (move.size() == 1 && move.get(0).x == 0 && move.get(0).y == 0) {
-                        shouldQuit = true;
-                    } else {
-                        if (checkMoveLegal(move, player1)) {
-                            played = true;
-                            makeMove(move, player1);
-                        }
-                    }
+                ArrayList<Tuple<Integer, Integer>> move = currentPlayer.makeMove(board);
+                if (move.size() == 1 && move.get(0).x == 0 && move.get(0).y == 0) {
+                    shouldQuit = true;
                 } else {
-                    ArrayList<Tuple<Integer, Integer>> move = player2.makeMove(board);
-                    if (move.size() == 1 && move.get(0).x == 0 && move.get(0).y == 0) {
-                        shouldQuit = true;
-                    } else {
-                        if (checkMoveLegal(move, player2)) {
-                            played = true;
-                            makeMove(move, player2);
-                        }
+                    if (checkMoveLegal(move, currentPlayer)) {
+                        played = true;
+                        makeMove(move, currentPlayer);
                     }
                 }
             }
             //check if game is over
             //switch turn
-            player1Turn = !player1Turn;
+            if (currentPlayer == player1) {
+                currentPlayer = player2;
+            } else {
+                currentPlayer = player1;
+            }
         }
         if (shouldQuit) {
             saveBoard();
-        }
-        // if player1 has no more pieces left, player 2 wins, else player1
-        if (board.getTeam(1).isEmpty()) {
-            winner = player2;
         } else {
-            winner = player1;
+            // if player1 has no more pieces left, player 2 wins, else player1
+            if (board.getTeam(1).isEmpty()) {
+                winner = player2;
+            } else {
+                winner = player1;
+            }
         }
     }
 

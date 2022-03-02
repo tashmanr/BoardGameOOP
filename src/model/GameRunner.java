@@ -16,7 +16,9 @@ public class GameRunner {
         scoreBoard = ScoreBoard.getInstance();
         game.start();
         Player winner = game.getWinner();
-        scoreBoard.addGameResults(winner.getPlayerName());
+        if (winner != null) {
+            scoreBoard.addGameResults(winner.getPlayerName());
+        }
     }
 
     public static GameRunner getInstance(Tuple<Player, Player> players, GameOptions o, boolean newGame, DefaultIO dio) {
