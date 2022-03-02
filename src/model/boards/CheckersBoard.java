@@ -117,11 +117,11 @@ public class CheckersBoard extends Board {
                 int axis_x = (start.x+end.x)/2;
                 int axis_y = (start.y + end.y)/2;
                 Tuple<Integer,Integer> removedLocation = new Tuple<>(axis_x,axis_y);
-                pieces[axis_x][axis_y] = null;
 
                 // update the hashmap
                 GamePiece removedPiece = getPieceByLocation(removedLocation);
                 teams.get(removedPiece.getTeam()).get(removedPiece).removeIf(n-> ((n.x == removedLocation.x) && (n.y==removedLocation.y)));
+                pieces[axis_x][axis_y] = null;
             }
             return true;
         }
