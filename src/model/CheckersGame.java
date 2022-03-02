@@ -63,7 +63,7 @@ public class CheckersGame extends Game {
 
         // get the piece in start position
         GamePiece movingPiece = board.getPieceByLocation(start);
-        if (movingPiece == null) {
+        if (movingPiece == null || !movingPiece.getTeam().equals(player.getTeam())) {
             return false;
         }
 
