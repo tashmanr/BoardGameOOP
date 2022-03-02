@@ -43,7 +43,7 @@ public abstract class Game {
             if (input.equals("y")) {
                 sgdb.saveData(board.getTeam(1), board.getTeam(2));
                 answered = true;
-            } else if (input.equals("n")){
+            } else if (input.equals("n")) {
                 answered = true;
             }
         }
@@ -60,18 +60,26 @@ public abstract class Game {
             //play turn
             dio.write(board.toString());
             boolean played = false;
-            while (!played) {
+            while (!played && !shouldQuit) {
                 if (player1Turn) {
                     ArrayList<Tuple<Integer, Integer>> move = player1.makeMove(board);
-                    if (checkMoveLegal(move, player1)) {
-                        played = true;
-                        makeMove(move, player1);
+                    if (move.size() == 1 && move.get(0).x == 0 && move.get(0).y == 0) {
+                        shouldQuit = true;
+                    } else {
+                        if (checkMoveLegal(move, player1)) {
+                            played = true;
+                            makeMove(move, player1);
+                        }
                     }
                 } else {
                     ArrayList<Tuple<Integer, Integer>> move = player2.makeMove(board);
-                    if (checkMoveLegal(move, player2)) {
-                        played = true;
-                        makeMove(move, player2);
+                    if (move.size() == 1 && move.get(0).x == 0 && move.get(0).y == 0) {
+                        shouldQuit = true;
+                    } else {
+                        if (checkMoveLegal(move, player2)) {
+                            played = true;
+                            makeMove(move, player2);
+                        }
                     }
                 }
             }
