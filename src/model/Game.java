@@ -66,12 +66,18 @@ public abstract class Game {
                     //player can't make any more moves, game over
                     isOver = true;
                     played = true;
-                } else if (move.size() == 1 && move.get(0).x == 0 && move.get(0).y == 0) {
-                    shouldQuit = true;
+                } else if (move.size() == 1) {
+                    if (move.get(0).x == 0 && move.get(0).y == 0) {
+                        shouldQuit = true;
+                    } else {
+                        dio.write("Invalid move.");
+                    }
                 } else {
                     if (checkMoveLegal(move, currentPlayer)) {
                         played = true;
                         makeMove(move, currentPlayer);
+                    } else {
+                        dio.write("Invalid move.");
                     }
                 }
             }

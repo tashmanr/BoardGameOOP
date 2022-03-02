@@ -1,69 +1,62 @@
 package model.players;
 
 import io.DefaultIO;
-import model.Game;
 import model.Tuple;
 import model.boards.Board;
 
 import java.util.ArrayList;
 
-import java.util.Scanner;
-
 public class HumanPlayer extends Player {
     /**
      * Updates the game state to take a move for the current player.
-     * @param game	the game to update.
+     *
+     * @param game    the game to update.
      */
-    
-    //private Scanner sc;
-    private DefaultIO io;
-    private String playerName = "Human";
 
-    public HumanPlayer(String name, DefaultIO io, Integer team){
+    private DefaultIO io;
+    private String playerName;
+
+    public HumanPlayer(String name, DefaultIO io, Integer team) {
         super(team);
-        // Using Scanner for Getting Input from User
-        //this.sc = new Scanner(System.in);
         playerName = name;
         this.io = io;
     }
 
     /**
      * Accept the
-     * @param board	the board to update.
+     *
+     * @param board the board to update.
      * @return
      */
-    public ArrayList<Tuple<Integer,Integer>> makeMove(Board board){
-        ArrayList<Tuple<Integer,Integer>> move = new ArrayList<Tuple<Integer,Integer>>();
+    public ArrayList<Tuple<Integer, Integer>> makeMove(Board board) {
+        ArrayList<Tuple<Integer, Integer>> move = new ArrayList<>();
 
         Boolean valid_input = false;
         String[] arrOfStr;
-        do{
+        do {
             io.write("please enter your move, if you finished entering the move enter 0, to exit the game enter -1:\n");
-            //System.out.print("please enter your move, if you finished entering the move enter 0, to exit the game enter -1:\n");
-            //String str= sc.nextLine();
             String str = io.read();
-            if(str.equals("0")){
+            if (str.equals("0")) {
                 // the user finished entering his move
+                if (move.isEmpty()) {
+                    move.add(new Tuple<>(1, 1));
+                }
                 break;
-            }
-            else if(str.equals("-1")){
+            } else if (str.equals("-1")) {
                 // the user wishes to exit the game
                 move.clear();
-                move.add(new Tuple(0,0));
+                move.add(new Tuple<>(0, 0));
                 break;
                 //return move;
-            }
-            else{
+            } else {
                 arrOfStr = str.split(",");
-                if(arrOfStr.length != 2){
+                if (arrOfStr.length != 2) {
                     io.write("Incorrect Input! Try again! \n");
-                    //System.out.print("Incorrect Input! Try again! \n");
-                }
-                else{
-                    move.add(new Tuple(Integer.parseInt(arrOfStr[0]), Integer.parseInt(arrOfStr[1])));
+                } else {
+                    move.add(new Tuple<>(Integer.parseInt(arrOfStr[0]), Integer.parseInt(arrOfStr[1])));
                 }
             }
-        }while(true);
+        } while (true);
 
         return move;
     }
