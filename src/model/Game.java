@@ -9,7 +9,7 @@ import savedGames.SavedGamesDatabaseCSV;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Game {
+public abstract class Game {
     protected Board board;
     protected Player player1;
     protected Player player2;
@@ -64,8 +64,8 @@ public class Game {
         }
     }
 
-    public Boolean makeMove(ArrayList<Tuple<Integer,Integer>> moves, Player player){return false;}
-    public Boolean checkMoveLegal(ArrayList<Tuple<Integer,Integer>> moves, Player player){return false;}
+    public abstract Boolean makeMove(ArrayList<Tuple<Integer,Integer>> moves, Player player);
+    public abstract Boolean checkMoveLegal(ArrayList<Tuple<Integer,Integer>> moves, Player player);
 
     public Player getWinner() {
         return winner;
