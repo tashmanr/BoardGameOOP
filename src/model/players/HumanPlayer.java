@@ -1,5 +1,6 @@
 package model.players;
 
+import io.DefaultIO;
 import model.Game;
 import model.Tuple;
 import model.boards.Board;
@@ -14,24 +15,32 @@ public class HumanPlayer extends Player {
      * @param game	the game to update.
      */
     
-    private Scanner sc;
+    //private Scanner sc;
+    private DefaultIO io;
     private String playerName = "Human";
 
-    public HumanPlayer(String name){
+    public HumanPlayer(String name, DefaultIO io){
         // Using Scanner for Getting Input from User
-        this.sc = new Scanner(System.in);
+        //this.sc = new Scanner(System.in);
         playerName = name;
+        this.io = io;
     }
-    
+
+    /**
+     * Accept the
+     * @param board	the board to update.
+     * @return
+     */
     public ArrayList<Tuple<Integer,Integer>> makeMove(Board board){
         ArrayList<Tuple<Integer,Integer>> move = new ArrayList<Tuple<Integer,Integer>>();
 
         Boolean valid_input = false;
         String[] arrOfStr;
         do{
-            // the input needs to be in format 1,2 3,4 while 1,2 is starting pos and 3,4 is new desired position
-            System.out.print("please enter your move, if you finished entering the move enter 0, to exit the game enter -1:\n");
-            String str= sc.nextLine();
+            io.write("please enter your move, if you finished entering the move enter 0, to exit the game enter -1:\n");
+            //System.out.print("please enter your move, if you finished entering the move enter 0, to exit the game enter -1:\n");
+            //String str= sc.nextLine();
+            String str = io.read();
             if(str.equals("0")){
                 // the user finished entering his move
                 break;
@@ -46,7 +55,8 @@ public class HumanPlayer extends Player {
             else{
                 arrOfStr = str.split(",");
                 if(arrOfStr.length != 2){
-                    System.out.print("Incorrect Input! Try again! \n");
+                    io.write("Incorrect Input! Try again! \n");
+                    //System.out.print("Incorrect Input! Try again! \n");
                 }
                 else{
                     move.add(new Tuple(Integer.parseInt(arrOfStr[0]), Integer.parseInt(arrOfStr[1])));
