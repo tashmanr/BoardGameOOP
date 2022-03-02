@@ -20,24 +20,25 @@ public class ManPiece extends GamePiece {
     @Override
     public ArrayList<Tuple<Integer, Integer>> calculateMoves(Tuple<Integer, Integer> location, GamePiece[][] board) {
         ArrayList<Tuple<Integer, Integer>> tmp = new ArrayList<>();
-        // if top right is empty, add it
-        if (location.x + 1 < 8 && location.y + moves.get(0) >= 0 && location.y + moves.get(0) < 8) {
-            if (board[location.x + 1][location.y + moves.get(0)] == null) {
-                tmp.add(new Tuple<>(location.x + 1, location.y + moves.get(0)));
-            } else if (!board[location.x + 1][location.y + moves.get(0)].getTeam().equals(team)) { // else if it's blocked by opposing team, see if we can jump
-                if (location.x + 2 < 8 && location.y + (2 * moves.get(0)) >= 0 && location.y + (2 * moves.get(0)) < 8 &&
-                        board[location.x + 2][location.y + (2 * moves.get(0))] == null) {
-                    tmp.add(new Tuple<>(location.x + 2, location.y + (2 * moves.get(0))));
+        for (var a : moves) {
+            if (location.y + 1 < 8 && location.x + a >= 0 && location.x + a < 8) {
+                if (board[location.x + a][location.y + 1] == null) {
+                    tmp.add(new Tuple<>(location.x + a, location.y + 1));
+                } else if (!board[location.x + a][location.y + 1].getTeam().equals(team)) { // else if it's blocked by opposing team, see if we can jump
+                    if (location.y + 2 < 8 && location.x + (2 * a) >= 0 && location.x + (2 * a) < 8 &&
+                            board[location.x + (2 * a)][location.y + 2] == null) {
+                        tmp.add(new Tuple<>(location.x + (2 * a), location.y + 2));
+                    }
                 }
             }
-        }
-        if (location.x - 1 >= 0 && location.y + moves.get(0) >= 0 && location.y + moves.get(0) < 8) {
-            if (board[location.x - 1][location.y + moves.get(0)] == null) {
-                tmp.add(new Tuple<>(location.x - 1, location.y + moves.get(0)));
-            } else if (!board[location.x - 1][location.y + moves.get(0)].getTeam().equals(team)) { // else if it's blocked by opposing team, see if we can jump
-                if (location.x - 2 >= 0 && location.y + (2 * moves.get(0)) >= 0 && location.y + (2 * moves.get(0)) < 8 &&
-                        board[location.x - 2][location.y + (2 * moves.get(0))] == null) {
-                    tmp.add(new Tuple<>(location.x - 2, location.y + (2 * moves.get(0))));
+            if (location.y - 1 >= 0 && location.x + a >= 0 && location.x + a < 8) {
+                if (board[location.x + a][location.y - 1] == null) {
+                    tmp.add(new Tuple<>(location.x + a, location.y - 1));
+                } else if (!board[location.x + a][location.y - 1].getTeam().equals(team)) { // else if it's blocked by opposing team, see if we can jump
+                    if (location.y - 2 >= 0 && location.x + (2 * a) >= 0 && location.x + (2 * a) < 8 &&
+                            board[location.x + (2 * a)][location.y - 2] == null) {
+                        tmp.add(new Tuple<>(location.x + (2 * a), location.y - 2));
+                    }
                 }
             }
         }
