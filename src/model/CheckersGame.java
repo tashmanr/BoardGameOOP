@@ -103,4 +103,9 @@ public class CheckersGame extends Game {
 
         return true;
     }
+
+    @Override
+    public boolean gameOver() {
+        return board.getTeam(1).isEmpty() || board.getTeam(2).isEmpty();
+    }
 }

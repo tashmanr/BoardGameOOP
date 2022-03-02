@@ -13,7 +13,6 @@ public abstract class Game {
     protected Board board;
     protected Player player1;
     protected Player player2;
-    private boolean player1Turn = true;
     private Player currentPlayer;
     private boolean isOver = false;
     private boolean shouldQuit = false;
@@ -73,6 +72,9 @@ public abstract class Game {
                 }
             }
             //check if game is over
+            if (gameOver()){
+                isOver = true;
+            }
             //switch turn
             if (currentPlayer == player1) {
                 currentPlayer = player2;
@@ -95,6 +97,8 @@ public abstract class Game {
     public abstract Boolean makeMove(ArrayList<Tuple<Integer, Integer>> moves, Player player);
 
     public abstract Boolean checkMoveLegal(ArrayList<Tuple<Integer, Integer>> moves, Player player);
+
+    public abstract boolean gameOver();
 
     public Player getWinner() {
         return winner;
