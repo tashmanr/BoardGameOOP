@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public abstract class Board {
     public GamePiece[][] pieces;
-    public HashMap<Integer, HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>>> teams;
+    public HashMap<Integer, HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>>> teams = new HashMap<>();
     //public HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>> team1 = new HashMap<>();
     //public HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>> team2 = new HashMap<>();
     public Integer size = 8;

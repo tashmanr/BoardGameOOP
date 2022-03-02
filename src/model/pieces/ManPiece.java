@@ -10,10 +10,10 @@ public class ManPiece extends GamePiece {
         super(team);
         if (team == 1) {
             // white
-            moves.add(CheckerPieceOptions.Up.toInt());
+            moves.add(CheckerPieceOptions.Down.toInt());
         } else {
             //black
-            moves.add(CheckerPieceOptions.Down.toInt());
+            moves.add(CheckerPieceOptions.Up.toInt());
         }
     }
 

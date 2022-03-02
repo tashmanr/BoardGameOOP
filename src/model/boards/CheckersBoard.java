@@ -40,7 +40,7 @@ public class CheckersBoard extends Board {
                         //team1.get(men1).add(new Tuple<>(i, j));
                     } else if (i > 4) {
                         pieces[i][j] = men2;
-                        teams.get(2).get(men1).add(new Tuple<>(i, j));
+                        teams.get(2).get(men2).add(new Tuple<>(i, j));
                         //team2.get(men2).add(new Tuple<>(i, j));
                     } else {
                         pieces[i][j] = null;
@@ -109,7 +109,7 @@ public class CheckersBoard extends Board {
             pieces[end.x][end.y] = mover;
 
             // update the hashmap
-            teams.get(mover.getTeam()).get(mover).remove(start);
+            teams.get(mover.getTeam()).get(mover).removeIf(n-> ((n.x == start.x) && (n.y==start.y)));
             teams.get(mover.getTeam()).get(mover).add(end);
 
             if(Math.abs(start.x - end.x) == 2){
@@ -121,7 +121,7 @@ public class CheckersBoard extends Board {
 
                 // update the hashmap
                 GamePiece removedPiece = getPieceByLocation(removedLocation);
-                teams.get(removedPiece.getTeam()).get(removedPiece).remove(removedLocation);
+                teams.get(removedPiece.getTeam()).get(removedPiece).removeIf(n-> ((n.x == removedLocation.x) && (n.y==removedLocation.y)));
             }
             return true;
         }
@@ -148,14 +148,14 @@ public class CheckersBoard extends Board {
     public void upgradePiece(Integer x, Integer y) {
         Tuple<Integer, Integer> t = new Tuple<>(x, y);
         if (pieces[x][y] == men1) {
-            teams.get(1).get(men1).remove(t);
+            teams.get(1).get(men1).removeIf(n-> ((n.x == t.x) && (n.y==t.y)));
             if (!teams.get(1).containsKey(king1)) {
                 teams.get(1).put(king1, new ArrayList<>());
             }
             teams.get(1).get(king1).add(t);
             pieces[x][y] = king1;
         } else if (pieces[x][y] == men2) {
-            teams.get(2).get(men2).remove(t);
+            teams.get(2).get(men2).removeIf(n-> ((n.x == t.x) && (n.y==t.y)));
             if (!teams.get(2).containsKey(king2)) {
                 teams.get(2).put(king2, new ArrayList<>());
             }
