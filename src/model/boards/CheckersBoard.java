@@ -22,8 +22,10 @@ public class CheckersBoard extends Board {
         men2 = new ManPiece(2);
         king1 = new KingPiece(1);
         king2 = new KingPiece(2);
-        team1.put(men1, new ArrayList<>());
-        team2.put(men2, new ArrayList<>());
+        teams.get(1).put(men1, new ArrayList<>());
+        teams.get(2).put(men2, new ArrayList<>());
+        //team1.put(men1, new ArrayList<>());
+        //team2.put(men2, new ArrayList<>());
     }
 
     @Override
@@ -34,10 +36,12 @@ public class CheckersBoard extends Board {
                 if (i % 2 != j % 2) {
                     if (i < 3) {
                         pieces[i][j] = men1;
-                        team1.get(men1).add(new Tuple<>(i, j));
+                        teams.get(1).get(men1).add(new Tuple<>(i, j));
+                        //team1.get(men1).add(new Tuple<>(i, j));
                     } else if (i > 4) {
                         pieces[i][j] = men2;
-                        team2.get(men2).add(new Tuple<>(i, j));
+                        teams.get(2).get(men1).add(new Tuple<>(i, j));
+                        //team2.get(men2).add(new Tuple<>(i, j));
                     } else {
                         pieces[i][j] = null;
                     }
@@ -49,12 +53,12 @@ public class CheckersBoard extends Board {
     }
 
     @Override
-    public void loadSavedBoard(Tuple<HashMap<String, ArrayList<Tuple<Integer, Integer>>>, HashMap<String, ArrayList<Tuple<Integer, Integer>>>> teams) {
+    public void loadSavedBoard(Tuple<HashMap<String, ArrayList<Tuple<Integer, Integer>>>, HashMap<String, ArrayList<Tuple<Integer, Integer>>>> teamsPositions) {
         createPieces();
-        for (var entry : teams.x.entrySet()) {
-            for (var gp : team1.entrySet()) {
+        for (var entry : teamsPositions.x.entrySet()) {
+            for (var gp : teams.get(1).entrySet()) {
                 if (gp.getKey().toString().equals(entry.getKey())) {
-                    team1.put(gp.getKey(), entry.getValue());
+                    teams.get(1).put(gp.getKey(), entry.getValue());
                     for (var t : entry.getValue()) {
                         pieces[t.x][t.y] = gp.getKey();
                     }
@@ -62,10 +66,10 @@ public class CheckersBoard extends Board {
                 }
             }
         }
-        for (var entry : teams.y.entrySet()) {
-            for (var gp : team2.entrySet()) {
+        for (var entry : teamsPositions.y.entrySet()) {
+            for (var gp : teams.get(2).entrySet()) {
                 if (gp.getKey().toString().equals(entry.getKey())) {
-                    team2.put(gp.getKey(), entry.getValue());
+                    teams.get(2).put(gp.getKey(), entry.getValue());
                     for (var t : entry.getValue()) {
                         pieces[t.x][t.y] = gp.getKey();
                     }
@@ -74,6 +78,28 @@ public class CheckersBoard extends Board {
             }
         }
 
+//        for (var entry : teamsPositions.x.entrySet()) {
+//            for (var gp : team1.entrySet()) {
+//                if (gp.getKey().toString().equals(entry.getKey())) {
+//                    team1.put(gp.getKey(), entry.getValue());
+//                    for (var t : entry.getValue()) {
+//                        pieces[t.x][t.y] = gp.getKey();
+//                    }
+//                    break;
+//                }
+//            }
+//        }
+//        for (var entry : teamsPositions.y.entrySet()) {
+//            for (var gp : team2.entrySet()) {
+//                if (gp.getKey().toString().equals(entry.getKey())) {
+//                    team2.put(gp.getKey(), entry.getValue());
+//                    for (var t : entry.getValue()) {
+//                        pieces[t.x][t.y] = gp.getKey();
+//                    }
+//                    break;
+//                }
+//            }
+//        }
     }
     @Override
     public boolean makeMove(Tuple<Integer, Integer> start, Tuple<Integer, Integer> end){
@@ -81,16 +107,27 @@ public class CheckersBoard extends Board {
         if (mover != null && isLegalMove(start, end)){
             pieces[start.x][start.y] = null;
             pieces[end.x][end.y] = mover;
+
+            // update the hashmap
+            teams.get(mover.getTeam()).get(mover).remove(start);
+            teams.get(mover.getTeam()).get(mover).add(end);
+
             if(Math.abs(start.x - end.x) == 2){
                 // meaning there is a piece in between we need to eliminate
                 int axis_x = (start.x+end.x)/2;
                 int axis_y = (start.y + end.y)/2;
+                Tuple<Integer,Integer> removedLocation = new Tuple<>(axis_x,axis_y);
                 pieces[axis_x][axis_y] = null;
+
+                // update the hashmap
+                GamePiece removedPiece = getPieceByLocation(removedLocation);
+                teams.get(removedPiece.getTeam()).get(removedPiece).remove(removedLocation);
             }
             return true;
         }
         return false;
     }
+
 
 
     @Override
@@ -111,20 +148,36 @@ public class CheckersBoard extends Board {
     public void upgradePiece(Integer x, Integer y) {
         Tuple<Integer, Integer> t = new Tuple<>(x, y);
         if (pieces[x][y] == men1) {
-            team1.get(men1).remove(t);
-            if (!team1.containsKey(king1)) {
-                team1.put(king1, new ArrayList<>());
+            teams.get(1).get(men1).remove(t);
+            if (!teams.get(1).containsKey(king1)) {
+                teams.get(1).put(king1, new ArrayList<>());
             }
-            team1.get(king1).add(t);
+            teams.get(1).get(king1).add(t);
             pieces[x][y] = king1;
         } else if (pieces[x][y] == men2) {
-            team2.get(men2).remove(t);
-            if (!team2.containsKey(king2)) {
-                team2.put(king2, new ArrayList<>());
+            teams.get(2).get(men2).remove(t);
+            if (!teams.get(2).containsKey(king2)) {
+                teams.get(2).put(king2, new ArrayList<>());
             }
-            team2.get(king2).add(t);
+            teams.get(2).get(king2).add(t);
             pieces[x][y] = king2;
         }
+
+//        if (pieces[x][y] == men1) {
+//            team1.get(men1).remove(t);
+//            if (!team1.containsKey(king1)) {
+//                team1.put(king1, new ArrayList<>());
+//            }
+//            team1.get(king1).add(t);
+//            pieces[x][y] = king1;
+//        } else if (pieces[x][y] == men2) {
+//            team2.get(men2).remove(t);
+//            if (!team2.containsKey(king2)) {
+//                team2.put(king2, new ArrayList<>());
+//            }
+//            team2.get(king2).add(t);
+//            pieces[x][y] = king2;
+//        }
     }
 }
 

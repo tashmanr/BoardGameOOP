@@ -8,12 +8,20 @@ import java.util.HashMap;
 
 public abstract class Board {
     public GamePiece[][] pieces;
-    public HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>> team1 = new HashMap<>();
-    public HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>> team2 = new HashMap<>();
+    public HashMap<Integer, HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>>> teams;
+    //public HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>> team1 = new HashMap<>();
+    //public HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>> team2 = new HashMap<>();
     public Integer size = 8;
 
     public Board() {
+
         this.pieces = new GamePiece[size][size];
+
+        HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>> team1 = new HashMap<>();
+        HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>> team2 = new HashMap<>();
+
+        teams.put(1, team1);
+        teams.put(2, team2);
     }
 
     protected abstract void createPieces();
@@ -27,9 +35,7 @@ public abstract class Board {
     }
 
     public HashMap<GamePiece, ArrayList<Tuple<Integer, Integer>>> getTeam(Integer i) {
-        if (i == 1) {
-            return team1;
-        } else return team2;
+        return teams.get(i);
     }
 
     /**
