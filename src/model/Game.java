@@ -95,11 +95,13 @@ public abstract class Game {
         if (shouldQuit) {
             saveBoard();
         } else {
-            // if player1 has no more pieces left, player 2 wins, else player1
-            if (board.getTeam(1).isEmpty()) {
-                winner = player2;
-            } else {
-                winner = player1;
+            if (!player1.toString().equals("ComputerPlayer")) {
+                // if player1 has no more pieces left, player 2 wins, else player1
+                if (board.getTeam(1).isEmpty()) {
+                    winner = player2;
+                } else {
+                    winner = player1;
+                }
             }
         }
     }
