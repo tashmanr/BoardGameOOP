@@ -93,9 +93,9 @@ public class StartGame extends Command {
     }
 
     private Tuple<Player, Player> getPlayers() {
-        int players = -1;
+        int players = 0;
         boolean firstTime = true;
-        while (players < 0 || players > 2) {
+        while (players < 1 || players > 2) {
             if (!firstTime) {
                 dio.write("Invalid input, must be 1 or 2 players");
             }
@@ -105,17 +105,14 @@ public class StartGame extends Command {
             firstTime = false;
         }
         int level = 0;
-        String name1 = "";
+        String name1 = getName(1);
         String name2 = "";
-        if (players != 0) {
-            name1 = getName(1);
-            if (players == 2) {
-                name2 = getName(2);
-            } else {
-                dio.write("Choose playing level:\n1.Easy\n2.Hard");
-                String input = dio.read();
-                level = Integer.parseInt(input);
-            }
+        if (players == 2) {
+            name2 = getName(2);
+        } else {
+            dio.write("Choose playing level:\n1.Easy\n2.Hard");
+            String input = dio.read();
+            level = Integer.parseInt(input);
         }
         playerInitializer = new PlayerInitializer();
         return playerInitializer.getPlayers(players, name1, name2, level, dio);
