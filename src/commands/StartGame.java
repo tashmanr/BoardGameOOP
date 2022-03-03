@@ -9,20 +9,49 @@ import model.players.PlayerInitializer;
 
 import java.util.EnumSet;
 
-public class PlayGame extends Command {
+public class StartGame extends Command {
     GameRunner gameRunner;
     PlayerInitializer playerInitializer;
 
-    public PlayGame(DefaultIO dio) {
-        super("Play a Game", dio);
+    public StartGame(DefaultIO dio) {
+        super("Game", dio);
     }
 
     @Override
     public void execute() {
         GameOptions o = pickGame();
-        Tuple<Player, Player> players = getPlayers();
-        boolean newGame = wantsNewGame();
-        gameRunner = GameRunner.getInstance(players, o, newGame, dio);
+        Tuple<Player, Player> players;
+        boolean newGame = false;
+        if (!demoMode()) {
+            players = getPlayers();
+            newGame = wantsNewGame();
+        } else {
+            players = setDemoPlayers();
+        }
+        gameRunner = GameRunner.getInstance(dio);
+        gameRunner.runGame(players, o, newGame);
+    }
+
+    private Tuple<Player, Player> setDemoPlayers() {
+        playerInitializer = new PlayerInitializer();
+        return playerInitializer.getPlayers(0, "", "", 0, dio);
+    }
+
+    private boolean demoMode() {
+        boolean valid = false;
+        boolean demo = false;
+        while (!valid) {
+            dio.write("Please pick a mode:\n1.Demo\n2.Play game");
+            String input = dio.read();
+            int result = Integer.parseInt(input);
+            if (result >= 1 && result <= 2) {
+                valid = true;
+                if (result == 1) {
+                    demo = true;
+                }
+            }
+        }
+        return demo;
     }
 
     private boolean wantsNewGame() {

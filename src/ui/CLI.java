@@ -1,7 +1,7 @@
 package ui;
 
 import commands.Command;
-import commands.PlayGame;
+import commands.StartGame;
 import commands.ShutDown;
 import commands.ViewScores;
 import io.DefaultIO;
@@ -14,7 +14,7 @@ public class CLI extends UI {
     public CLI(DefaultIO d) {
         dio = d;
         commands = new ArrayList<>();
-        commands.add(new PlayGame(dio));
+        commands.add(new StartGame(dio));
         commands.add(new ViewScores(dio));
         commands.add(new ShutDown(dio));
     }
