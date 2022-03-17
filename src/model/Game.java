@@ -1,6 +1,5 @@
 package model;
 
-import io.DefaultIO;
 import model.boards.Board;
 import model.players.Player;
 import savedGames.ISavedGamesDatabase;

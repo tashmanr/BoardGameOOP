@@ -1,6 +1,5 @@
 package model;
 
-import io.DefaultIO;
 import model.boards.CheckersBoard;
 import model.pieces.CheckerPieceOptions;
 import model.pieces.GamePiece;

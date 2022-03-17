@@ -1,13 +1,9 @@
 package ui;
 
 import commands.Command;
-import commands.StartGame;
-import commands.ShutDown;
-import commands.ViewScores;
 import io.DefaultIO;
 import io.TerminalIO;
 
-import java.util.ArrayList;
 
 public class CLI extends UI {
     protected DefaultIO dio;

@@ -1,6 +1,5 @@
 package commands;
 
-import io.DefaultIO;
 import ui.UI;
 
 public class ShutDown extends Command {

@@ -1,6 +1,5 @@
 package model.players;
 
-import io.DefaultIO;
 import model.Tuple;
 import ui.UI;
 
