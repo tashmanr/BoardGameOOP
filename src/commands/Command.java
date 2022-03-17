@@ -1,14 +1,15 @@
 package commands;
 
 import io.DefaultIO;
+import ui.UI;
 
 public abstract class Command {
     public String description;
-    protected DefaultIO dio;
+    protected UI ui;
 
-    public Command(String s, DefaultIO d){
+    public Command(String s, UI ui){
         description = s;
-        dio = d;
+        this.ui = ui;
     }
 
     public abstract void execute();

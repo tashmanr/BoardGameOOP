@@ -1,8 +1,8 @@
 package model.players;
 
-import io.DefaultIO;
 import model.Tuple;
 import model.boards.Board;
+import ui.UI;
 
 import java.util.ArrayList;
 
@@ -13,13 +13,13 @@ public class HumanPlayer extends Player {
      * @param game    the game to update.
      */
 
-    private DefaultIO io;
+    private UI ui;
     private String playerName;
 
-    public HumanPlayer(String name, DefaultIO io, Integer team) {
+    public HumanPlayer(String name, UI ui, Integer team) {
         super(team);
         playerName = name;
-        this.io = io;
+        this.ui = ui;
     }
 
     /**
@@ -34,8 +34,8 @@ public class HumanPlayer extends Player {
         Boolean valid_input = false;
         String[] arrOfStr;
         do {
-            io.write("please enter your move, if you finished entering the move enter 0, to exit the game enter -1:\n");
-            String str = io.read();
+            ui.write("please enter your move, if you finished entering the move enter 0, to exit the game enter -1:\n");
+            String str = ui.read();
             if (str.equals("0")) {
                 // the user finished entering his move
                 if (move.isEmpty()) {
@@ -51,7 +51,7 @@ public class HumanPlayer extends Player {
             } else {
                 arrOfStr = str.split(",");
                 if (arrOfStr.length != 2) {
-                    io.write("Incorrect Input! Try again! \n");
+                    ui.write("Incorrect Input! Try again! \n");
                 } else {
                     move.add(new Tuple<>(Integer.parseInt(arrOfStr[0]), Integer.parseInt(arrOfStr[1])));
                 }

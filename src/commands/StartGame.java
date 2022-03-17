@@ -1,11 +1,11 @@
 package commands;
 
-import io.DefaultIO;
 import model.GameOptions;
 import model.GameRunner;
 import model.Tuple;
 import model.players.Player;
 import model.players.PlayerInitializer;
+import ui.UI;
 
 import java.util.EnumSet;
 
@@ -13,8 +13,8 @@ public class StartGame extends Command {
     GameRunner gameRunner;
     PlayerInitializer playerInitializer;
 
-    public StartGame(DefaultIO dio) {
-        super("Game", dio);
+    public StartGame(UI ui) {
+        super("Game", ui);
     }
 
     @Override
@@ -28,21 +28,21 @@ public class StartGame extends Command {
         } else {
             players = setDemoPlayers();
         }
-        gameRunner = GameRunner.getInstance(dio);
+        gameRunner = GameRunner.getInstance(ui);
         gameRunner.runGame(players, o, newGame);
     }
 
     private Tuple<Player, Player> setDemoPlayers() {
         playerInitializer = new PlayerInitializer();
-        return playerInitializer.getPlayers(0, "", "", 0, dio);
+        return playerInitializer.getPlayers(0, "", "", 0, ui);
     }
 
     private boolean demoMode() {
         boolean valid = false;
         boolean demo = false;
         while (!valid) {
-            dio.write("Please pick a mode:\n1.Demo\n2.Play game");
-            String input = dio.read();
+            ui.write("Please pick a mode:\n1.Demo\n2.Play game");
+            String input = ui.read();
             int result = Integer.parseInt(input);
             if (result >= 1 && result <= 2) {
                 valid = true;
@@ -58,8 +58,8 @@ public class StartGame extends Command {
         boolean valid = false;
         boolean newGame = false;
         while (!valid) {
-            dio.write("Would you like to retrieve an old game? [y/n]");
-            String input = dio.read();
+            ui.write("Would you like to retrieve an old game? [y/n]");
+            String input = ui.read();
             if (input.equals("y") || input.equals("n")) {
                 valid = true;
                 if (input.equals("n")) {
@@ -74,14 +74,14 @@ public class StartGame extends Command {
         // logic to pick kind of game
         EnumSet<GameOptions> options = EnumSet.range(GameOptions.CHECKERS, GameOptions.CHECKERS);
         while (true) {
-            dio.write("Please pick a game");
+            ui.write("Please pick a game");
             int i = 1;
             for (GameOptions o : options) {
-                dio.write(i + ". " + o);
+                ui.write(i + ". " + o);
                 i++;
             }
             // receive option choice
-            String input = dio.read();
+            String input = ui.read();
             int index = Integer.parseInt(input);
             index -= 1;
             for (GameOptions o : options) {
@@ -97,10 +97,10 @@ public class StartGame extends Command {
         boolean firstTime = true;
         while (players < 1 || players > 2) {
             if (!firstTime) {
-                dio.write("Invalid input, must be 1 or 2 players");
+                ui.write("Invalid input, must be 1 or 2 players");
             }
-            dio.write("How many players?");
-            String input = dio.read();
+            ui.write("How many players?");
+            String input = ui.read();
             players = Integer.parseInt(input);
             firstTime = false;
         }
@@ -110,16 +110,16 @@ public class StartGame extends Command {
         if (players == 2) {
             name2 = getName(2);
         } else {
-            dio.write("Choose playing level:\n1.Easy\n2.Hard");
-            String input = dio.read();
+            ui.write("Choose playing level:\n1.Easy\n2.Hard");
+            String input = ui.read();
             level = Integer.parseInt(input);
         }
         playerInitializer = new PlayerInitializer();
-        return playerInitializer.getPlayers(players, name1, name2, level, dio);
+        return playerInitializer.getPlayers(players, name1, name2, level, ui);
     }
 
     private String getName(int player) {
-        dio.write("Please enter name for player " + player);
-        return dio.read();
+        ui.write("Please enter name for player " + player);
+        return ui.read();
     }
 }

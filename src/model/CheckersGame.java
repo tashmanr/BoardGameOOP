@@ -5,14 +5,15 @@ import model.boards.CheckersBoard;
 import model.pieces.CheckerPieceOptions;
 import model.pieces.GamePiece;
 import model.players.Player;
+import ui.UI;
 
 import java.lang.Math;
 
 import java.util.ArrayList;
 
 public class CheckersGame extends Game {
-    public CheckersGame(DefaultIO dio) {
-        super(dio);
+    public CheckersGame(UI ui) {
+        super(ui);
         this.board = new CheckersBoard();
     }
 

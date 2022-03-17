@@ -5,6 +5,7 @@ import model.boards.Board;
 import model.players.Player;
 import savedGames.ISavedGamesDatabase;
 import savedGames.SavedGamesDatabaseCSV;
+import ui.UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,11 +19,11 @@ public abstract class Game {
     private boolean shouldQuit = false;
     private Player winner;
     private ISavedGamesDatabase sgdb;
-    private DefaultIO dio;
+    private UI ui;
 
-    public Game(DefaultIO dio) {
+    public Game(UI ui) {
         sgdb = new SavedGamesDatabaseCSV();
-        this.dio = dio;
+        this.ui = ui;
     }
 
     public void loadGame(boolean newGame) {
@@ -38,8 +39,8 @@ public abstract class Game {
     public void saveBoard() {
         boolean answered = false;
         while (!answered) {
-            dio.write("Would you like to save your game? [y/n]");
-            String input = dio.read();
+            ui.write("Would you like to save your game? [y/n]");
+            String input = ui.read();
             if (input.equals("y")) {
                 sgdb.saveData(board.getTeam(1), board.getTeam(2));
                 answered = true;
@@ -58,7 +59,7 @@ public abstract class Game {
         currentPlayer = player1;
         while (!isOver && !shouldQuit) {
             //play turn
-            dio.write(board.toString());
+            ui.write(board.toString());
             boolean played = false;
             while (!played && !shouldQuit) {
                 ArrayList<Tuple<Integer, Integer>> move = currentPlayer.makeMove(board);
@@ -70,14 +71,14 @@ public abstract class Game {
                     if (move.get(0).x == 0 && move.get(0).y == 0) {
                         shouldQuit = true;
                     } else {
-                        dio.write("Invalid move.");
+                        ui.write("Invalid move.");
                     }
                 } else {
                     if (checkMoveLegal(move, currentPlayer)) {
                         played = true;
                         makeMove(move, currentPlayer);
                     } else {
-                        dio.write("Invalid move.");
+                        ui.write("Invalid move.");
                     }
                 }
             }

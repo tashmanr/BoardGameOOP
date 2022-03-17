@@ -1,35 +1,35 @@
 package model;
 
-import io.DefaultIO;
 import model.players.Player;
 import scores.ScoreBoard;
+import ui.UI;
 
 public class GameRunner {
     private static GameRunner runnerInstance = null;
     private ScoreBoard scoreBoard;
     private Game game;
     private GameInitializer gameInitializer;
-    private DefaultIO dio;
+    private UI ui;
 
-    private GameRunner(DefaultIO dio) {
-        this.dio = dio;
+    private GameRunner(UI ui) {
+        this.ui = ui;
         scoreBoard = ScoreBoard.getInstance();
     }
 
-    public static GameRunner getInstance(DefaultIO dio) {
+    public static GameRunner getInstance(UI ui) {
         if (runnerInstance == null) {
-            runnerInstance = new GameRunner(dio);
+            runnerInstance = new GameRunner(ui);
         }
         return runnerInstance;
     }
 
     public void runGame(Tuple<Player, Player> players, GameOptions o, boolean newGame){
         gameInitializer = new GameInitializer();
-        game = gameInitializer.getGame(o, players, newGame, dio);
+        game = gameInitializer.getGame(o, players, newGame, ui);
         game.start();
         Player winner = game.getWinner();
         if (winner != null) {
-            dio.write(winner.getPlayerName() + " is the winner!\n");
+            ui.write(winner.getPlayerName() + " is the winner!\n");
             scoreBoard.addGameResults(winner.getPlayerName());
         }
     }
